@@ -1,0 +1,6 @@
+framework module Pods_WeeklyToDo {
+  umbrella header "Pods-WeeklyToDo-umbrella.h"
+
+  export *
+  module * { export * }
+}
