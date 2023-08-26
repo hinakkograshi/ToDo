@@ -6,10 +6,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+
+    var toDoItems: Results<Item>?
+    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +22,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return toDoItems?.count ?? 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -28,7 +32,5 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.toDoLabel.text = "ToDoを記入してください"
         return cell
     }
-
-
 }
 

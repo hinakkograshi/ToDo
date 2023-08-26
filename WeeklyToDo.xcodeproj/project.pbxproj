@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		532A71612A9A342A00708CBE /* ToDoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */; };
 		532A71622A9A342A00708CBE /* ToDoListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532A71602A9A342A00708CBE /* ToDoListTableViewCell.xib */; };
+		532A71642A9A5B2C00708CBE /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A71632A9A5B2C00708CBE /* Item.swift */; };
 		533B76B22A90A17400CDF8A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B76B12A90A17400CDF8A5 /* AppDelegate.swift */; };
 		533B76B42A90A17400CDF8A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B76B32A90A17400CDF8A5 /* SceneDelegate.swift */; };
 		533B76B62A90A17400CDF8A5 /* ToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B76B52A90A17400CDF8A5 /* ToDoViewController.swift */; };
@@ -23,6 +24,7 @@
 		1F381F0A98F7F5A291FA4A57 /* Pods-WeeklyToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeeklyToDo.release.xcconfig"; path = "Target Support Files/Pods-WeeklyToDo/Pods-WeeklyToDo.release.xcconfig"; sourceTree = "<group>"; };
 		532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDoListTableViewCell.swift; path = WeeklyToDo/View/ToDoListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		532A71602A9A342A00708CBE /* ToDoListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ToDoListTableViewCell.xib; path = WeeklyToDo/View/ToDoListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
+		532A71632A9A5B2C00708CBE /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		533B76AE2A90A17400CDF8A5 /* WeeklyToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		533B76B12A90A17400CDF8A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		533B76B32A90A17400CDF8A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		532A715C2A9A30C300708CBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				532A71632A9A5B2C00708CBE /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -72,6 +75,15 @@
 				533B76C62A90F17000CDF8A5 /* CalendarViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		532A71652A9A61D600708CBE /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				533B76BA2A90A17400CDF8A5 /* Assets.xcassets */,
+				533B76BC2A90A17400CDF8A5 /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 		533B76A52A90A17300CDF8A5 = {
@@ -100,8 +112,7 @@
 				532A715C2A9A30C300708CBE /* Model */,
 				532A715D2A9A315400708CBE /* View */,
 				532A715E2A9A317100708CBE /* Controller */,
-				533B76BA2A90A17400CDF8A5 /* Assets.xcassets */,
-				533B76BC2A90A17400CDF8A5 /* LaunchScreen.storyboard */,
+				532A71652A9A61D600708CBE /* Supporting */,
 				533B76BF2A90A17400CDF8A5 /* Info.plist */,
 			);
 			path = WeeklyToDo;
@@ -244,6 +255,7 @@
 				533B76B62A90A17400CDF8A5 /* ToDoViewController.swift in Sources */,
 				532A71612A9A342A00708CBE /* ToDoListTableViewCell.swift in Sources */,
 				533B76B22A90A17400CDF8A5 /* AppDelegate.swift in Sources */,
+				532A71642A9A5B2C00708CBE /* Item.swift in Sources */,
 				533B76B42A90A17400CDF8A5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

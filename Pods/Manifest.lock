@@ -6,11 +6,13 @@ PODS:
   - Realm/Headers (10.42.0)
   - RealmSwift (10.42.0):
     - Realm (= 10.42.0)
+  - SwipeCellKit (2.7.1)
 
 DEPENDENCIES:
   - CalculateCalendarLogic
   - FSCalendar
   - RealmSwift
+  - SwipeCellKit
 
 SPEC REPOS:
   trunk:
@@ -18,13 +20,15 @@ SPEC REPOS:
     - FSCalendar
     - Realm
     - RealmSwift
+    - SwipeCellKit
 
 SPEC CHECKSUMS:
   CalculateCalendarLogic: e4f7c7fe17f68b1d30fb51560acc634b4629a622
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
   Realm: 490aad28f1360e58fc22256d5d686d3a36525346
   RealmSwift: f6a9b56d747bbdd7931de1835896c5f024b6898a
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
 
-PODFILE CHECKSUM: 714ffcd3f2e3ebe53245339045d00654600f0750
+PODFILE CHECKSUM: f5486156fae9e098c16528e08f6c0b3e2574f9f1
 
 COCOAPODS: 1.12.1

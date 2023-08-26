@@ -9,6 +9,7 @@ target 'WeeklyToDo' do
   pod 'RealmSwift'
   pod 'FSCalendar'
   pod 'CalculateCalendarLogic'
+  pod 'SwipeCellKit'
   post_install do |installer|
   installer.generated_projects.each do |project|
     project.targets.each do |target|
