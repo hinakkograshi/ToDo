@@ -7,8 +7,11 @@
 
 import UIKit
 import RealmSwift
+import XLPagerTabStrip
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    //ここがボタンのタイトルに利用されます
+    var itemInfo: IndicatorInfo = "やること"
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -31,6 +34,12 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
        
         cell.toDoLabel.text = "ToDoを記入してください"
         return cell
+    }
+}
+
+extension ToDoViewController: IndicatorInfoProvider {
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return itemInfo
     }
 }
 

@@ -7,12 +7,14 @@ PODS:
   - RealmSwift (10.42.0):
     - Realm (= 10.42.0)
   - SwipeCellKit (2.7.1)
+  - XLPagerTabStrip (9.1.0)
 
 DEPENDENCIES:
   - CalculateCalendarLogic
   - FSCalendar
   - RealmSwift
   - SwipeCellKit
+  - XLPagerTabStrip (~> 9.0)
 
 SPEC REPOS:
   trunk:
@@ -21,6 +23,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SwipeCellKit
+    - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   CalculateCalendarLogic: e4f7c7fe17f68b1d30fb51560acc634b4629a622
@@ -28,7 +31,8 @@ SPEC CHECKSUMS:
   Realm: 490aad28f1360e58fc22256d5d686d3a36525346
   RealmSwift: f6a9b56d747bbdd7931de1835896c5f024b6898a
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
+  XLPagerTabStrip: 27f3bfe23c53b4251c6481b06b1c289458a3fc1d
 
-PODFILE CHECKSUM: f5486156fae9e098c16528e08f6c0b3e2574f9f1
+PODFILE CHECKSUM: dfca86151e691bc60f417c6c956f7e6fd8ec0578
 
 COCOAPODS: 1.12.1

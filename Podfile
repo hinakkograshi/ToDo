@@ -10,6 +10,7 @@ target 'WeeklyToDo' do
   pod 'FSCalendar'
   pod 'CalculateCalendarLogic'
   pod 'SwipeCellKit'
+  pod 'XLPagerTabStrip', '~> 9.0'
   post_install do |installer|
   installer.generated_projects.each do |project|
     project.targets.each do |target|

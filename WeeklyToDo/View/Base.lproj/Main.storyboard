@@ -69,12 +69,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MvX-cg-bKq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2730.5343511450383" y="736.61971830985919"/>
+            <point key="canvasLocation" x="1882" y="877"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="0ud-WY-HyB">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3hc-oR-xA6" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="3hc-oR-xA6" customClass="MainTabBarController" customModule="WeeklyToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O78-4g-HdN">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -82,10 +82,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" red="0.94509803920000002" green="0.60392156860000001" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
-                    <connections>
-                        <segue destination="0BN-39-tQK" kind="relationship" relationship="viewControllers" id="eJK-Kv-kIB"/>
-                        <segue destination="kqM-A7-dos" kind="relationship" relationship="viewControllers" id="sXm-Gu-a8J"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSV-4Q-W4w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,12 +116,60 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="tde-iq-SG1" kind="relationship" relationship="rootViewController" id="GjC-BQ-L1V"/>
+                        <segue destination="F4J-0Q-3OK" kind="relationship" relationship="rootViewController" id="yLI-Fo-X0R"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-ra-Z83" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1935.1145038167938" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="1784" y="4"/>
+        </scene>
+        <!--Weekly ToDo-->
+        <scene sceneID="Rau-RY-HGe">
+            <objects>
+                <viewController id="F4J-0Q-3OK" customClass="WeeklyToDoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nzZ-B6-DZZ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6ol-nF-DVu" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="103" width="393" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="SSJ-3d-9qy"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mh4-Yc-BOd">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mxy-r3-MTf">
+                                <rect key="frame" x="0.0" y="153" width="393" height="665"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Re2-vz-t5k"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Mxy-r3-MTf" firstAttribute="leading" secondItem="Re2-vz-t5k" secondAttribute="leading" id="H6q-px-fQ6"/>
+                            <constraint firstItem="Re2-vz-t5k" firstAttribute="trailing" secondItem="Mxy-r3-MTf" secondAttribute="trailing" id="Ndc-xa-5pa"/>
+                            <constraint firstItem="Re2-vz-t5k" firstAttribute="trailing" secondItem="6ol-nF-DVu" secondAttribute="trailing" id="Sio-yy-eOD"/>
+                            <constraint firstItem="6ol-nF-DVu" firstAttribute="leading" secondItem="Re2-vz-t5k" secondAttribute="leading" id="fTo-xQ-Rlv"/>
+                            <constraint firstItem="Re2-vz-t5k" firstAttribute="bottom" secondItem="Mxy-r3-MTf" secondAttribute="bottom" id="iwb-De-mxG"/>
+                            <constraint firstItem="Mxy-r3-MTf" firstAttribute="top" secondItem="6ol-nF-DVu" secondAttribute="bottom" id="rfw-3X-Txc"/>
+                            <constraint firstItem="6ol-nF-DVu" firstAttribute="top" secondItem="Re2-vz-t5k" secondAttribute="top" id="tXm-Ya-Nse"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Weekly ToDo" id="cb1-Zd-3hE"/>
+                    <connections>
+                        <outlet property="buttonBarView" destination="6ol-nF-DVu" id="Wrs-6V-HZw"/>
+                        <outlet property="containerView" destination="Mxy-r3-MTf" id="iAc-qp-zHy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hYJ-K2-IsV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2583.969465648855" y="3.5211267605633805"/>
         </scene>
         <!--To Do View Controller-->
         <scene sceneID="Xqd-ci-cXz">
@@ -136,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="noc-ia-hJr">
-                                <rect key="frame" x="0.0" y="103" width="393" height="666"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="tde-iq-SG1" id="4QV-UD-4Nt"/>
@@ -144,7 +188,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ail-oF-dDU">
-                                <rect key="frame" x="308" y="684" width="70" height="70"/>
+                                <rect key="frame" x="308" y="733" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="7Gt-6S-7qA"/>
                                     <constraint firstAttribute="height" constant="70" id="yLK-fg-b3v"/>
@@ -171,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lb4-Xt-5Vv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2704.5801526717555" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="3389" y="4"/>
         </scene>
         <!--Item-->
         <scene sceneID="kg1-EM-cj1">
@@ -190,7 +234,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jkC-aj-uVE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1803.8167938931297" y="736.61971830985919"/>
+            <point key="canvasLocation" x="1008" y="877"/>
         </scene>
     </scenes>
     <resources>
