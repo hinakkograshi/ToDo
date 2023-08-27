@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oad-8b-1iL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -9,24 +9,56 @@
     </dependencies>
     <scenes>
         <!--Reward View Controller-->
-        <scene sceneID="jeY-63-nBB">
+        <scene sceneID="gJS-or-pN8">
             <objects>
-                <viewController storyboardIdentifier="Reward" id="Oad-8b-1iL" customClass="RewardViewController" customModule="WeeklyToDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Zpt-DF-IB6">
+                <viewController storyboardIdentifier="Reward" id="Jvp-vj-hJ4" customClass="RewardViewController" customModule="WeeklyToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KTi-kz-UDg">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="iWq-3Q-EIc"/>
-                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FY4-1z-FEg">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Jvp-vj-hJ4" id="Arg-w7-O4a"/>
+                                    <outlet property="delegate" destination="Jvp-vj-hJ4" id="oaA-UI-ype"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrh-eg-kAX">
+                                <rect key="frame" x="308" y="733" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="ue6-02-bgU"/>
+                                    <constraint firstAttribute="width" constant="70" id="yuu-WG-GxA"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="addButton"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="x9P-Ks-I2x"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="x9P-Ks-I2x" firstAttribute="bottom" secondItem="rrh-eg-kAX" secondAttribute="bottom" constant="15" id="1l0-Pl-41Y"/>
+                            <constraint firstItem="FY4-1z-FEg" firstAttribute="leading" secondItem="x9P-Ks-I2x" secondAttribute="leading" id="AmS-9F-r0h"/>
+                            <constraint firstItem="FY4-1z-FEg" firstAttribute="trailing" secondItem="x9P-Ks-I2x" secondAttribute="trailing" id="Ehc-kR-nI1"/>
+                            <constraint firstItem="FY4-1z-FEg" firstAttribute="top" secondItem="x9P-Ks-I2x" secondAttribute="top" id="MRD-CK-ByM"/>
+                            <constraint firstItem="x9P-Ks-I2x" firstAttribute="bottom" secondItem="FY4-1z-FEg" secondAttribute="bottom" id="V0C-38-xo8"/>
+                            <constraint firstItem="x9P-Ks-I2x" firstAttribute="trailing" secondItem="rrh-eg-kAX" secondAttribute="trailing" constant="15" id="fJL-WU-mKa"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="W8u-Ev-Fii"/>
+                    <connections>
+                        <outlet property="tableView" destination="FY4-1z-FEg" id="AH0-W0-1XX"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TfH-65-FB6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J3v-Qn-agp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2868" y="-124"/>
+            <point key="canvasLocation" x="3273" y="-294"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="addButton" width="70" height="70.333335876464844"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
