@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class ToDoListTableViewCell: UITableViewCell {
+class ToDoListTableViewCell: SwipeTableViewCell {
 
     @IBOutlet weak var checkImageView: UIImageView!
     

@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import XLPagerTabStrip
+import SwipeCellKit
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -39,11 +40,12 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoItems?.count ?? 1
     }
-    
+
 //🟥customCell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ToDoListTableViewCell
-        //
+        //🟥 SwipeCellKit
+        cell.delegate = self
         //           cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added yet."
 
         cell.checkImageView.image = UIImage(systemName: "square")
@@ -52,7 +54,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             //三項演算子
             //カスタム・アクセサリー・ビューがaccessoryViewプロパティで設定されている場合、このプロパティの値は無視される。
             //accessoryTypeが設定されている場合は、.checkmark
-            cell.checkImageView.image = item.done ? UIImage(systemName: "checkmark.square") : UIImage(systemName: "square") 
+            cell.checkImageView.image = item.done ? UIImage(systemName: "checkmark.square") : UIImage(systemName: "square")
         } else {
             cell.textLabel?.text = "No Items Added"
         }
@@ -105,18 +107,18 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //MARK: - Delete Data From Swipe
 
-    func updateModel(at indexPath: IndexPath) {
-        if let itemForDeletion = self.toDoItems?[indexPath.row] {
-            do {
-                //セルを削除してRealmデータベースに存在しないようにする
-                try self.realm.write {
-                    self.realm.delete(itemForDeletion)
-                }
-            } catch {
-                print("Error deleting category,\(error)")
-            }
-        }
-    }
+//    func updateModel(at indexPath: IndexPath) {
+//        if let itemForDeletion = self.toDoItems?[indexPath.row] {
+//            do {
+//                //セルを削除してRealmデータベースに存在しないようにする
+//                try self.realm.write {
+//                    self.realm.delete(itemForDeletion)
+//                }
+//            } catch {
+//                print("Error deleting category,\(error)")
+//            }
+//        }
+//    }
 
     @IBAction func addButonPressed(_ sender: UIButton) {
         var textField = UITextField()
@@ -141,51 +143,46 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         present(alert, animated: true, completion: nil)
     }
 }
+////    //MARK: - Swipe Cell Delegate Methods
+extension ToDoViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeCellKit.SwipeActionsOrientation) -> [SwipeCellKit.SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            if let itemForDeletion = self.toDoItems?[indexPath.row] {
+                do {
+                    //セルを削除してRealmデータベースに存在しないようにする
+                    try self.realm.write {
+                        self.realm.delete(itemForDeletion)
+                    }
+                } catch {
+                    print("Error deleting category,\(error)")
+                }
+            }
+        }
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "deleteIcon")
+
+        return [deleteAction]
+    }
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        return options
+    }
+}
+func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+    var options = SwipeOptions()
+    options.expansionStyle = .destructive
+    return options
+}
 
 
-//            let newItem = Item()
-//            do {
-//                try self.realm.write {
-//                    let newItem = Item()
-//                    newItem.title = textField.text!
-//                    newItem.dateCreated = Date()
-////                    toDoItems.items.append(newItem)
-//                    self.save(items: newItem)
-//                }
-//            } catch {
-//                print("Error saving new items. \(error)")
-//            }
-//
-//            //この新しいデータをすべてRealmに書き込んだら、tableViewを再読み込み
-//            self.tableView.reloadData()
-//
-//            //追加入力項目表示
-//            alert.addTextField { alertTextField in
-//                alertTextField.placeholder = "新規タスク"
-//                textField = alertTextField
-//            }
-//
-//            alert.addAction(action)
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//
-//    }
-//}
 
-//    //MARK: - Swipe Cell Delegate Methods
 //extension ToDoViewController: SwipeTableViewCellDelegate {
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeCellKit.SwipeActionsOrientation) -> [SwipeCellKit.SwipeAction]? {
-//        guard orientation == .right else { return nil }
 //
-//        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-//            // handle action by updating model with deletion
-//        }
-//
-//        // customize the action appearance
-//        deleteAction.image = UIImage(named: "deleteIcon")
-//
-//        return [deleteAction]
-//    }
 //}
 
 extension ToDoViewController: IndicatorInfoProvider {
