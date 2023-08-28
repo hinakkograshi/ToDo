@@ -32,6 +32,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="addButton"/>
+                                <connections>
+                                    <action selector="addButonPressed:" destination="FsA-A7-d49" eventType="touchUpInside" id="SVW-pg-Hnw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jn4-dg-nR7"/>
