@@ -9,6 +9,6 @@ import Foundation
 import RealmSwift
 
 class Reward: Object {
-    @objc dynamic var title: String = ""
-    @objc dynamic var done: Bool = false
+    @Persisted var title: String = ""
+    @Persisted var done: Bool = false
 }

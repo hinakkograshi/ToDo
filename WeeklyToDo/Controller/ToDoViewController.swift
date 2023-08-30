@@ -128,7 +128,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             //クラスから新しいオブジェクトが作成され、
             let newItem = Item()
             newItem.title = textField.text!
-            //            配列に追加
             //realmは自動更新型だから必要ない
             //                self.categories.append(newCategory)
             //                newCategoryをRealmコンテナにカテゴリ保存。func save
@@ -140,6 +139,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             textField = field
             textField.placeholder = "新しいカテゴリーを追加"
         }
+        let cancelButton = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
+        alert.addAction(cancelButton)
         present(alert, animated: true, completion: nil)
     }
 }
