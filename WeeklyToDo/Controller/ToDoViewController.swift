@@ -19,26 +19,37 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     let realm = try! Realm()
 
-    var toDoItems: Results<Item>?
+    var toDoItems: Results<Item>!
 
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //並べ替えデータ取得
+        toDoItems = realm.objects(Item.self).sorted(byKeyPath: "order")
+        tableView.allowsSelectionDuringEditing = true
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 60.0
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        //🟥忘れるな
-        loadItems()
+        //常時編集状態にする(isEditing,allowsSelectionDuringEditing)
+        //編集モードおん
+               tableView.isEditing = true
+               tableView.allowsSelectionDuringEditing = true
 
-        //   newCategoryをRealmコンテナにカテゴリ保存。func save
-        //        save(category: newCategory)
+               // trueで複数選択、falseで単一選択
+               tableView.allowsMultipleSelection = true
+        //🟥忘れるな
+        tableView.reloadData()
     }
 
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+            return 1
+        }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItems?.count ?? 1
+        return toDoItems.count
     }
 
 //🟥customCell
@@ -82,28 +93,52 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    //ユーザーが並び替えを行うと、UITableViewはUIを更新します
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        print("🟥")
 
-    //データ操作
-    //MARK: - Data Manipulation Methods
-    func save(items: Item) {
-        do {
-            //保存
-            try realm.write {
-                realm.add(items)
+            try! realm.write {
+                print("🟦")
+                let sourceObject = toDoItems[sourceIndexPath.row]
+                print("最初の行",sourceObject.order)
+                let destinationObject = toDoItems[destinationIndexPath.row]
+
+                let destinationObjectOrder = destinationObject.order
+
+                if sourceIndexPath.row < destinationIndexPath.row {
+                    print("🟨")
+
+                    for index in sourceIndexPath.row...destinationIndexPath.row {
+                        let object = toDoItems[index]
+                        object.order -= 1
+
+                    }
+                } else {
+                    print("🟧")
+                    for index in (destinationIndexPath.row..<sourceIndexPath.row).reversed() {
+                        let object = toDoItems[index]
+                        object.order += 1
+                    }
+                }
+                sourceObject.order = destinationObjectOrder
+                print("最後の行",sourceObject.order)
             }
-        } catch {
-            print("Errorsaving category \(error)")
-        }
-        tableView.reloadData()
+        print("🟩")
+                    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+                return false
+            }
+    //全てのセルを並び替えできるようにしたいので、常にtrue
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
-    //データの取得.Reed
-    func loadItems() {
-        //realm内のカテゴリオブジェクトをすべて取得。
-        // 🟩コンテナ型であるresults
-        //それらの変数を自動更新して監視するだけ
-        toDoItems = realm.objects(Item.self)
-        tableView.reloadData()
-    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+            return .none
+            }
+
+
 
     //MARK: - Delete Data From Swipe
 
@@ -128,12 +163,18 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             //クラスから新しいオブジェクトが作成され、
             let newItem = Item()
             newItem.title = textField.text!
-            //realmは自動更新型だから必要ない
-            //                self.categories.append(newCategory)
-            //                newCategoryをRealmコンテナにカテゴリ保存。func save
-            self.save(items: newItem)
+            //🟥
+            // MARK: order をインクリメントする
+                        if let lastItem = self.toDoItems.last {
+                            newItem.order = lastItem.order + 1
+                        }
+            try! self.realm.write {
+                self.realm.add(newItem)
+                        }
 
-        }
+                        self.tableView.reloadData()
+                    }
+
         alert.addAction(action)
         alert.addTextField { field in
             textField = field
