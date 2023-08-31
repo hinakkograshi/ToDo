@@ -32,7 +32,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ToDoListTableViewCell
         cell.checkImageView.image = UIImage(systemName: "square")
 
-        cell.toDoLabel.text = "ごほうびを記入してください"
+        cell.toDoTextField.text = "ごほうびを記入してください"
         return cell
     }
 }

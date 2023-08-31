@@ -6,23 +6,38 @@
 //
 
 import UIKit
-import SwipeCellKit
+//import SwipeCellKit
 
-class ToDoListTableViewCell: SwipeTableViewCell {
+protocol ChangeDelegate {
+    func textFieldDidEndEditing(cell:ToDoListTableViewCell, value:String)
+}
+
+class ToDoListTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var checkImageView: UIImageView!
-    
-    @IBOutlet weak var toDoLabel: UILabel!
-    
+
+    @IBOutlet weak var toDoTextField: UITextField!
+    var delegate: ChangeDelegate! = nil
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        toDoTextField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    //デリゲートメソッド
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //キーボードを閉じる。
+        textField.resignFirstResponder()
+        return true
+    }
+    //デリゲートメソッド
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        //テキストフィールドから受けた通知をデリゲート先に流す。
+        self.delegate.textFieldDidEndEditing(cell: self, value: textField.text!)
+    }
+
     
 }
