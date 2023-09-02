@@ -44,11 +44,30 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         //
         //               // trueで複数選択、falseで単一選択
         //               tableView.allowsMultipleSelection = true
+      
         let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
                 tapGR.cancelsTouchesInView = false
                 self.view.addGestureRecognizer(tapGR)
+        // 複数選択を可能にする
+        //編集モードおん
+        // falseの場合は単一選択になる
+//        tableView.allowsMultipleSelectionDuringEditing = false
+
         //🟥忘れるな
         tableView.reloadData()
+    }
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: animated)
+//        tableView.isEditing = editing
+//
+//        print(editing)
+//    }
+
+    //デリゲートメソッド
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //キーボードを閉じる。
+        textField.resignFirstResponder()
+        return true
     }
     @objc func dismissKeyboard() {
             self.view.endEditing(true)
@@ -91,8 +110,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         //変更されたセルのインデックスを取得する。
         let index = tableView.indexPathForRow(at: cell.convert(cell.bounds.origin, to:tableView))
         print(index!)
-
-
         try! realm.write {
             //データを変更する。
             toDoItems[index!.row].title = value
@@ -177,15 +194,45 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
 
     }
-
-    ////    削除はできず並び替えだけしたい場合
-    //    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-    //            return .none
-    //            }
-    ////  左側に謎のスペース消す
-    //    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-    //                return false
-    //            }
+//🟥削除
+    internal func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let itemForDeletion = self.toDoItems?[indexPath.row] {
+                do {
+                    //セルを削除してRealmデータベースに存在しないようにする
+                    try self.realm.write {
+                        self.realm.delete(itemForDeletion)
+                    }
+                } catch {
+                    print("Error deleting category,\(error)")
+                }
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if let itemForDeletion = self.toDoItems?[indexPath.row] {
+//            do {
+//                //セルを削除してRealmデータベースに存在しないようにする
+//                try self.realm.write {
+//                    self.realm.delete(itemForDeletion)
+//                }
+//            } catch {
+//                print("Error deleting category,\(error)")
+//            }
+//        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+//    }
+//
+//    }
+//    //    削除はできず並び替えだけしたい場合
+//        func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//                return .none
+//                }
+//    //  左側に謎のスペース消す
+//        func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+//                    return false
+//                }
 
 
     //MARK: - Delete Data From Swipe

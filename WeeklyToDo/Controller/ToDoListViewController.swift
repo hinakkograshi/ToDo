@@ -21,6 +21,9 @@ class ToDoListViewController: ButtonBarPagerTabStripViewController {
         // 強制的に再選択し、changeCurrentIndexProgressiveを動作させる（ 0番目 → 1番目 → 0番目 ）
         moveToViewController(at: 1, animated: false)
         moveToViewController(at: 0, animated: false)
+
+    // ボタンの設定
+//    navigationItem.rightBarButtonItem = editButtonItem
     }
 
     func setupUI() {

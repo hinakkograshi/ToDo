@@ -82,7 +82,9 @@
                             <constraint firstItem="mYl-Db-uGM" firstAttribute="bottom" secondItem="g3E-IG-dij" secondAttribute="bottom" id="tmA-xv-foW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Weekly ToDo" id="bbg-9I-9sN"/>
+                    <navigationItem key="navigationItem" title="Weekly ToDo" id="bbg-9I-9sN">
+                        <barButtonItem key="rightBarButtonItem" title="編集" id="FvN-I1-pqx"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="SkK-io-Avw" id="GaK-Nb-Lph"/>
                         <outlet property="containerView" destination="g3E-IG-dij" id="eGV-ec-aHu"/>
@@ -90,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZjN-gl-1O5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2583.969465648855" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="2628" y="4"/>
         </scene>
     </scenes>
     <resources>
