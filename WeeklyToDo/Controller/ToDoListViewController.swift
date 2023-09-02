@@ -22,8 +22,7 @@ class ToDoListViewController: ButtonBarPagerTabStripViewController {
         moveToViewController(at: 1, animated: false)
         moveToViewController(at: 0, animated: false)
 
-    // ボタンの設定
-//    navigationItem.rightBarButtonItem = editButtonItem
+
     }
 
     func setupUI() {

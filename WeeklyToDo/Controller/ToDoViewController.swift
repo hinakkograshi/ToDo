@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 import XLPagerTabStrip
-import SwipeCellKit
+
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate, ChangeDelegate {
 
@@ -37,32 +37,13 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dataSource = self
         tableView.rowHeight = 60.0
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-        //常時編集状態にする(isEditing,allowsSelectionDuringEditing)
-        //        //編集モードおん
-        //               tableView.isEditing = true
-        //               tableView.allowsSelectionDuringEditing = true
-        //
-        //               // trueで複数選択、falseで単一選択
-        //               tableView.allowsMultipleSelection = true
       
         let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
                 tapGR.cancelsTouchesInView = false
                 self.view.addGestureRecognizer(tapGR)
-        // 複数選択を可能にする
-        //編集モードおん
-        // falseの場合は単一選択になる
-//        tableView.allowsMultipleSelectionDuringEditing = false
-
         //🟥忘れるな
         tableView.reloadData()
     }
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//        tableView.isEditing = editing
-//
-//        print(editing)
-//    }
-
     //デリゲートメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //キーボードを閉じる。
@@ -88,16 +69,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         //自作のセルのデリゲート先に自分を設定する
         cell.delegate = self
 
-        //🟥 SwipeCellKit
-        //        cell.delegate = self
-        //           cell.textLabel?.text = categories?[indexPath.row].name ?? "No Categories Added yet."
-
         cell.checkImageView.image = UIImage(systemName: "square")
         if let item = toDoItems?[indexPath.row] {
             cell.toDoTextField?.text = item.title
-            //三項演算子
-            //カスタム・アクセサリー・ビューがaccessoryViewプロパティで設定されている場合、このプロパティの値は無視される。
-            //accessoryTypeが設定されている場合は、.checkmark
             cell.checkImageView.image = item.done ? UIImage(systemName: "checkmark.square") : UIImage(systemName: "square")
         } else {
             cell.textLabel?.text = "No Items Added"
@@ -206,49 +180,12 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
                 } catch {
                     print("Error deleting category,\(error)")
                 }
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if let itemForDeletion = self.toDoItems?[indexPath.row] {
-//            do {
-//                //セルを削除してRealmデータベースに存在しないようにする
-//                try self.realm.write {
-//                    self.realm.delete(itemForDeletion)
-//                }
-//            } catch {
-//                print("Error deleting category,\(error)")
-//            }
-//        tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-//    }
-//
-//    }
-//    //    削除はできず並び替えだけしたい場合
-//        func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//                return .none
-//                }
-//    //  左側に謎のスペース消す
-//        func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-//                    return false
-//                }
 
 
-    //MARK: - Delete Data From Swipe
-
-    //    func updateModel(at indexPath: IndexPath) {
-    //        if let itemForDeletion = self.toDoItems?[indexPath.row] {
-    //            do {
-    //                //セルを削除してRealmデータベースに存在しないようにする
-    //                try self.realm.write {
-    //                    self.realm.delete(itemForDeletion)
-    //                }
-    //            } catch {
-    //                print("Error deleting category,\(error)")
-    //            }
-    //        }
-    //    }
 
     @IBAction func addButonPressed(_ sender: UIButton) {
         var textField = UITextField()
@@ -280,36 +217,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         present(alert, animated: true, completion: nil)
     }
 }
-////    //MARK: - Swipe Cell Delegate Methods
-//extension ToDoViewController: SwipeTableViewCellDelegate {
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeCellKit.SwipeActionsOrientation) -> [SwipeCellKit.SwipeAction]? {
-//        guard orientation == .right else { return nil }
-//
-//        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-//            // handle action by updating model with deletion
-//            if let itemForDeletion = self.toDoItems?[indexPath.row] {
-//                do {
-//                    //セルを削除してRealmデータベースに存在しないようにする
-//                    try self.realm.write {
-//                        self.realm.delete(itemForDeletion)
-//                    }
-//                } catch {
-//                    print("Error deleting category,\(error)")
-//                }
-//            }
-//        }
-//        // customize the action appearance
-//        deleteAction.image = UIImage(named: "deleteIcon")
-//
-//        return [deleteAction]
-//    }
-//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-//        var options = SwipeOptions()
-//        options.expansionStyle = .destructive
-//        options.transitionStyle = .border
-//        return options
-//    }
-//}
 
 extension ToDoViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

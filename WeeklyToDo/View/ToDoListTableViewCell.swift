@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//import SwipeCellKit
 
 protocol ChangeDelegate {
     func textFieldDidEndEditing(cell:ToDoListTableViewCell, value:String)
