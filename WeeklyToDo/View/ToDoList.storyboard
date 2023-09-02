@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nr5-Aj-UNi">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -26,7 +27,7 @@
                             <barButtonItemAppearance key="buttonAppearance">
                                 <barButtonItemStateAppearance key="normal">
                                     <textAttributes key="titleTextAttributes">
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" systemColor="labelColor"/>
                                     </textAttributes>
                                 </barButtonItemStateAppearance>
                                 <barButtonItemStateAppearance key="highlighted"/>
@@ -82,9 +83,7 @@
                             <constraint firstItem="mYl-Db-uGM" firstAttribute="bottom" secondItem="g3E-IG-dij" secondAttribute="bottom" id="tmA-xv-foW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Weekly ToDo" id="bbg-9I-9sN">
-                        <barButtonItem key="rightBarButtonItem" title="編集" id="FvN-I1-pqx"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Weekly ToDo" id="bbg-9I-9sN"/>
                     <connections>
                         <outlet property="buttonBarView" destination="SkK-io-Avw" id="GaK-Nb-Lph"/>
                         <outlet property="containerView" destination="g3E-IG-dij" id="eGV-ec-aHu"/>
@@ -97,6 +96,9 @@
     </scenes>
     <resources>
         <image name="pencil.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

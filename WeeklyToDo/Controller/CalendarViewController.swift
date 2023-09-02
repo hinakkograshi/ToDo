@@ -79,7 +79,6 @@ class CalendarViewController: UIViewController,FSCalendarDelegate,FSCalendarData
         else if weekday == 7 {  //土曜日
             return UIColor.blue
         }
-
         return nil
     }
 

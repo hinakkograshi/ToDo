@@ -11,4 +11,5 @@ import RealmSwift
 class Reward: Object {
     @Persisted var title: String = ""
     @Persisted var done: Bool = false
+    @Persisted var order = 0
 }

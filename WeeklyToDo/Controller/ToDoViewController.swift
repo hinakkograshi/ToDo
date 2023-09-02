@@ -12,17 +12,13 @@ import XLPagerTabStrip
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate, ChangeDelegate {
 
-
     //ここがボタンのタイトルに利用されます
     var itemInfo: IndicatorInfo = "やること"
 
     @IBOutlet weak var tableView: UITableView!
 
     let realm = try! Realm()
-
     var toDoItems: Results<Item>!
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,16 +27,12 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dropDelegate = self
         //並べ替えデータ取得
         toDoItems = realm.objects(Item.self).sorted(byKeyPath: "order")
-        //        tableView.allowsSelectionDuringEditing = true
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 60.0
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
-      
-        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-                tapGR.cancelsTouchesInView = false
-                self.view.addGestureRecognizer(tapGR)
+        setDismissKeyboard()
         //🟥忘れるな
         tableView.reloadData()
     }
@@ -50,10 +42,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         textField.resignFirstResponder()
         return true
     }
-    @objc func dismissKeyboard() {
-            self.view.endEditing(true)
-        }
-
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -91,17 +79,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         self.tableView.reloadData()
     }
-    @objc func hideKeybord() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, animations: {
-            self.view.transform = .identity
-        })
-    }
-    //他のところ触ったらキーボードを閉じる
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-
-
     //MARK - TableView Delegate Methods
     //cellがクリックで選択された
 
@@ -126,10 +103,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     //ユーザーが並び替えを行うと、UITableViewはUIを更新します
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        print("🟥")
 
         try! realm.write {
-            print("🟦")
             let sourceObject = toDoItems[sourceIndexPath.row]
             print("最初の行",sourceObject.order)
             let destinationObject = toDoItems[destinationIndexPath.row]
@@ -137,7 +112,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             let destinationObjectOrder = destinationObject.order
 
             if sourceIndexPath.row < destinationIndexPath.row {
-                print("🟨")
 
                 for index in sourceIndexPath.row...destinationIndexPath.row {
                     let object = toDoItems[index]
@@ -145,7 +119,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                 }
             } else {
-                print("🟧")
                 for index in (destinationIndexPath.row..<sourceIndexPath.row).reversed() {
                     let object = toDoItems[index]
                     object.order += 1
@@ -154,7 +127,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
             sourceObject.order = destinationObjectOrder
             print("最後の行",sourceObject.order)
         }
-        print("🟩")
     }
 
 
@@ -168,6 +140,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
 
     }
+
 //🟥削除
     internal func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -191,12 +164,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         var textField = UITextField()
         let alert = UIAlertController(title: "新しいカテゴリーを追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "追加", style: .default) { action in
-            //ユーザーが追加ボタンを押したら何が起こるか
-            //クラスから新しいオブジェクトが作成され、
+
             let newItem = Item()
             newItem.title = textField.text!
-            //🟥
-            // MARK: order をインクリメントする
             if let lastItem = self.toDoItems.last {
                 newItem.order = lastItem.order + 1
             }
@@ -216,6 +186,18 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         alert.addAction(cancelButton)
         present(alert, animated: true, completion: nil)
     }
+}
+//キーボード閉じる
+extension UIViewController {
+    func setDismissKeyboard() {
+        let tapGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGR.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGR)
+    }
+
+    @objc func dismissKeyboard() {
+            self.view.endEditing(true)
+        }
 }
 
 extension ToDoViewController: IndicatorInfoProvider {
