@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Calendar View Controller-->
+        <!--日記-->
         <scene sceneID="5v1-By-fHd">
             <objects>
                 <viewController storyboardIdentifier="Calendar" id="yvk-nl-LaP" customClass="CalendarViewController" customModule="WeeklyToDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47G-or-FBn" customClass="FSCalendar">
-                                <rect key="frame" x="20" y="94" width="335" height="300"/>
+                                <rect key="frame" x="20" y="99" width="335" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="Q8M-sM-Hhx"/>
@@ -55,10 +55,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06k-FJ-B7y">
-                                <rect key="frame" x="20" y="409" width="335" height="354"/>
+                                <rect key="frame" x="20" y="414" width="335" height="349"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zGb-Xo-84K">
-                                        <rect key="frame" x="0.0" y="35" width="335" height="319"/>
+                                        <rect key="frame" x="0.0" y="35" width="335" height="314"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2023.09.02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeE-1C-VdW">
@@ -68,7 +68,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMP-Uf-juw">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMP-Uf-juw">
                                         <rect key="frame" x="300" y="0.0" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="aON-n8-qJ3"/>
@@ -78,14 +78,19 @@
                                         <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="addButonPressed:" destination="yvk-nl-LaP" eventType="touchUpInside" id="HhN-8b-VlS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zGb-Xo-84K" secondAttribute="trailing" id="6qC-t9-Z7J"/>
                                     <constraint firstItem="zGb-Xo-84K" firstAttribute="leading" secondItem="06k-FJ-B7y" secondAttribute="leading" id="Mks-cJ-1D6"/>
+                                    <constraint firstItem="AMP-Uf-juw" firstAttribute="top" secondItem="06k-FJ-B7y" secondAttribute="top" id="TAT-Oi-0yZ"/>
                                     <constraint firstAttribute="trailing" secondItem="AMP-Uf-juw" secondAttribute="trailing" id="Wrr-XW-Bzs"/>
                                     <constraint firstAttribute="bottom" secondItem="zGb-Xo-84K" secondAttribute="bottom" id="dV8-Ta-O1Y"/>
+                                    <constraint firstItem="zGb-Xo-84K" firstAttribute="top" secondItem="AMP-Uf-juw" secondAttribute="bottom" id="fMd-rS-NOJ"/>
                                     <constraint firstItem="zGb-Xo-84K" firstAttribute="top" secondItem="06k-FJ-B7y" secondAttribute="top" constant="35" id="m7y-oj-7Wq"/>
                                 </constraints>
                             </view>
@@ -93,18 +98,20 @@
                         <viewLayoutGuide key="safeArea" id="Cgl-oW-P7P"/>
                         <color key="backgroundColor" red="1" green="0.97254901959999995" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="47G-or-FBn" firstAttribute="top" secondItem="Cgl-oW-P7P" secondAttribute="top" id="1Zk-Ls-Hbs"/>
                             <constraint firstItem="Cgl-oW-P7P" firstAttribute="trailing" secondItem="06k-FJ-B7y" secondAttribute="trailing" constant="20" id="L2Q-Vd-2dN"/>
                             <constraint firstItem="Cgl-oW-P7P" firstAttribute="trailing" secondItem="47G-or-FBn" secondAttribute="trailing" constant="20" id="OUL-27-ave"/>
                             <constraint firstItem="06k-FJ-B7y" firstAttribute="leading" secondItem="Cgl-oW-P7P" secondAttribute="leading" constant="20" id="Qxy-s2-ucB"/>
                             <constraint firstItem="47G-or-FBn" firstAttribute="leading" secondItem="Cgl-oW-P7P" secondAttribute="leading" constant="20" id="T8B-Wa-bts"/>
+                            <constraint firstItem="47G-or-FBn" firstAttribute="top" secondItem="Cgl-oW-P7P" secondAttribute="top" constant="5" id="UNR-QU-3jh"/>
                             <constraint firstItem="Cgl-oW-P7P" firstAttribute="bottom" secondItem="06k-FJ-B7y" secondAttribute="bottom" constant="15" id="k72-Xg-IHb"/>
                             <constraint firstItem="06k-FJ-B7y" firstAttribute="top" secondItem="47G-or-FBn" secondAttribute="bottom" constant="15" id="oXN-7o-Jk9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Yel-IN-u3E"/>
+                    <navigationItem key="navigationItem" title="日記" id="Yel-IN-u3E"/>
                     <connections>
                         <outlet property="calendar" destination="47G-or-FBn" id="ebP-7A-u0M"/>
+                        <outlet property="dateLabel" destination="WeE-1C-VdW" id="tmq-J8-jSE"/>
+                        <outlet property="tableView" destination="zGb-Xo-84K" id="CSc-T2-Jg6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMQ-bi-Jnx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -120,6 +127,13 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hpU-O3-TyH">
                         <rect key="frame" x="0.0" y="50" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance"/>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" red="1" green="0.72156862745098038" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </textAttributes>
+                        </navigationBarAppearance>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
