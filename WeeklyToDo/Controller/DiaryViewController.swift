@@ -33,12 +33,6 @@ class DiaryViewController: UIViewController {
         contentText.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         dateLabel.text = day
     }
-    //MARK: 🍔６　デリゲートから受け取ったデータを使用して、Labelを上書きする。（デリゲートの具体的な処理内容）
-    //*⭕️デリゲートの設定がない場合。
-    func addSave(day: String) {
-        dateLabel.text = day
-    }
-
     
     @IBAction func didTapCancel(_ sender: UIBarButtonItem) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
