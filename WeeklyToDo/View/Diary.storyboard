@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--日付-->
+        <!--Diary View Controller-->
         <scene sceneID="N3n-wx-cFu">
             <objects>
                 <viewController storyboardIdentifier="Diary" id="Wis-XQ-VvQ" customClass="DiaryViewController" customModule="WeeklyToDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -69,6 +69,13 @@
                                     <constraint firstAttribute="trailing" secondItem="RY0-Az-gpl" secondAttribute="trailing" id="iSd-xH-zBJ"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUa-HU-HIb">
+                                <rect key="frame" x="162" y="114" width="98" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gOO-mF-uFD"/>
                         <color key="backgroundColor" red="1" green="0.97254901959999995" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -81,7 +88,7 @@
                             <constraint firstItem="S7d-EG-ODf" firstAttribute="top" secondItem="gOO-mF-uFD" secondAttribute="top" constant="40" id="seP-7o-jXU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="日付" id="w6P-66-kaj">
+                    <navigationItem key="navigationItem" id="w6P-66-kaj">
                         <barButtonItem key="leftBarButtonItem" title="戻る" id="Y4M-A7-y3a">
                             <color key="tintColor" red="0.94509803920000002" green="0.60392156860000001" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
@@ -97,6 +104,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contentText" destination="RY0-Az-gpl" id="xOY-T6-VJM"/>
+                        <outlet property="dateLabel" destination="KUa-HU-HIb" id="CDO-nC-WWV"/>
                         <outlet property="titleText" destination="jRf-xC-yeF" id="rU6-Sa-ZFw"/>
                     </connections>
                 </viewController>

@@ -11,5 +11,5 @@ import RealmSwift
 class DiaryModel: Object {
     @Persisted var title: String = ""
     @Persisted var content: String = ""
-    @Persisted var date = ""
+    @Persisted var date: String = ""
 }

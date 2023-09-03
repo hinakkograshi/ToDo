@@ -12,25 +12,29 @@ import RealmSwift
 
 class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance{
 
+
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var calendar: FSCalendar!
 
     @IBOutlet weak var dateLabel: UILabel!
+    var calendarDay : String = ""
+
     let realm = try! Realm()
 
     var diaryModels: Results<DiaryModel>!
-    //    var diaryModels: [[String:String]] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.rowHeight = 150.0
         // デリゲートの設定
         self.calendar.dataSource = self
         self.calendar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
-        // Realmからデータを取得
+        // 🟥Realmからデータを取得
         do{
             let realm = try Realm()
             diaryModels = realm.objects(DiaryModel.self)
@@ -59,9 +63,10 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     @IBAction func addButonPressed(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Diary", bundle: nil)
-        let diaryViewController = storyboard.instantiateViewController(identifier: "Diary") as! DiaryViewController
-        let navigationController = UINavigationController(rootViewController: diaryViewController)
+
+        let diaryVC = UIStoryboard(name: "Diary", bundle: nil).instantiateViewController(withIdentifier: "Diary") as! DiaryViewController
+        diaryVC.day = calendarDay
+        let navigationController = UINavigationController(rootViewController: diaryVC)
         //🟥フルスクリーンにしないと閉じたことを認識されない
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
@@ -142,6 +147,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
             }
         }
     }
+
     //FSCalendarで日付がタップされた時の処理は以下の関数を使用
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let tmpDate = Calendar(identifier: .gregorian)
@@ -149,8 +155,37 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let month = tmpDate.component(.month, from: date)
         let day = tmpDate.component(.day, from: date)
         dateLabel.text = "\(year)/\(month)/\(day)"
+        calendarDay = dateLabel.text ?? ""
+        print("\(calendarDay)")
+
+//        self.tableView.reloadData()
+//        //スケジュール取得
+//                let realm = try! Realm()
+//                var result = realm.objects(DiaryModel.self)
+////        "\(year)/\(month)/\(day)"
+//                result = result.filter("date = '\(calendarDay)'")
+//                print(result)
+//                for ev in result {
+//                    if diaryModel.date {
+//                        titleText.text = ev.title
+//                        labelDate.textColor = .black
+//                        view.addSubview(labelDate)
+//                    }
+//                }
+        }
+//    func getModel() {
+//        let results = diaryModels?.filter("date == %@", calendarDay)
+////        realm.objects(Person.self).filter("age >= 20")
+//        for result in results {
+//            eventModels.append(["title": result.title,
+//                                "memo": result.memo,
+//                                "date": result.date,
+//                                "start_time": result.start_time,
+//                                "end_time": result.end_time])
+//        }
+//    }
     }
-}
+
 
 //        let calendarDate = Calendar(identifier: .gregorian)
 //        let year = calendarDate.component(.year, from: date)
