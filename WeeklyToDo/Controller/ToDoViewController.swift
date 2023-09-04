@@ -60,7 +60,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.checkImageView.image = UIImage(systemName: "square")
         if let item = toDoItems?[indexPath.row] {
             cell.toDoTextField?.text = item.title
-            cell.checkImageView.image = item.done ? UIImage(systemName: "checkmark.square") : UIImage(systemName: "square")
+            cell.checkImageView.image = item.done ? UIImage(named: "check") : UIImage(named: "box")
         } else {
             cell.textLabel?.text = "No Items Added"
         }

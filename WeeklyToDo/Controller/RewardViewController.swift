@@ -55,7 +55,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.delegate = self
         if let Reward = RewardList?[indexPath.row] {
             cell.toDoTextField?.text = Reward.title
-            cell.checkImageView.image = Reward.done ? UIImage(systemName: "checkmark.square",withConfiguration: UIImage.SymbolConfiguration(hierarchicalColor: .systemRed)) : UIImage(systemName: "square",withConfiguration: UIImage.SymbolConfiguration(hierarchicalColor: .red))
+            cell.checkImageView.image = Reward.done ? UIImage(named: "present") : UIImage(named: "rewardBox")
         } else {
             cell.textLabel?.text = "No Items Added"
         }
