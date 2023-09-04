@@ -25,7 +25,6 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dropDelegate = self
         //並べ替えデータ取得
         RewardList = realm.objects(Reward.self).sorted(byKeyPath: "order")
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 60.0
@@ -138,7 +137,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
 //🟥削除
-    internal func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let itemForDeletion = self.RewardList?[indexPath.row] {
                 do {
@@ -151,9 +150,8 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-        }
     }
-
+    }
 
 
     @IBAction func addButonPressed(_ sender: UIButton) {

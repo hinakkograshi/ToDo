@@ -40,15 +40,13 @@ class DiaryViewController: UIViewController {
 
 //保存ボタンを押した際に保存
     @IBAction func diarySave(_ sender: UIBarButtonItem) {
+        diaryModel.title = titleText.text  ?? ""
+        diaryModel.content = contentText.text ?? ""
+        diaryModel.date = dateLabel.text ?? ""
 
-                try! realm.write {
-                    diaryModel.title = titleText.text  ?? ""
-                    diaryModel.content = contentText.text ?? ""
-                    diaryModel.date = dateLabel.text ?? ""
-                    realm.add(diaryModel)
-                }
+        try! realm.write {
+            realm.add(diaryModel)
+        }
         self.dismiss(animated: true,completion: nil)
-           
     }
-
 }

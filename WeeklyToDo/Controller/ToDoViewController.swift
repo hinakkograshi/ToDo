@@ -142,7 +142,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
 //🟥削除
-    internal func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let itemForDeletion = self.toDoItems?[indexPath.row] {
                 do {

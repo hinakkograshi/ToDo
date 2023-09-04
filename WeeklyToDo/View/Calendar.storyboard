@@ -31,7 +31,7 @@
                                         <color key="value" systemColor="systemPinkColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="todayColor">
-                                        <color key="value" systemColor="systemRedColor"/>
+                                        <color key="value" red="0.98431372549999996" green="0.84705882349999995" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="subtitleTextSize">
                                         <integer key="value" value="0"/>
@@ -43,7 +43,7 @@
                                         <color key="value" systemColor="systemOrangeColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="todaySelectionColor">
-                                        <color key="value" systemColor="systemRedColor"/>
+                                        <color key="value" systemColor="systemOrangeColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="selectionColor">
                                         <color key="value" systemColor="systemOrangeColor"/>
@@ -64,13 +64,6 @@
                                         <rect key="frame" x="0.0" y="35" width="335" height="314"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeE-1C-VdW">
-                                        <rect key="frame" x="121" y="8" width="93" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMP-Uf-juw">
                                         <rect key="frame" x="300" y="0.0" width="35" height="35"/>
                                         <constraints>
@@ -85,13 +78,25 @@
                                             <action selector="addButonPressed:" destination="yvk-nl-LaP" eventType="touchUpInside" id="HhN-8b-VlS"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeE-1C-VdW">
+                                        <rect key="frame" x="97.666666666666686" y="7" width="140" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="t6O-7i-CsS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.72156862749999995" blue="0.29803921570000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zGb-Xo-84K" secondAttribute="trailing" id="6qC-t9-Z7J"/>
+                                    <constraint firstItem="WeE-1C-VdW" firstAttribute="top" secondItem="06k-FJ-B7y" secondAttribute="top" constant="7" id="INO-DJ-1cm"/>
+                                    <constraint firstItem="WeE-1C-VdW" firstAttribute="centerX" secondItem="06k-FJ-B7y" secondAttribute="centerX" id="M8R-c7-Rgw"/>
                                     <constraint firstItem="zGb-Xo-84K" firstAttribute="leading" secondItem="06k-FJ-B7y" secondAttribute="leading" id="Mks-cJ-1D6"/>
                                     <constraint firstItem="AMP-Uf-juw" firstAttribute="top" secondItem="06k-FJ-B7y" secondAttribute="top" id="TAT-Oi-0yZ"/>
                                     <constraint firstAttribute="trailing" secondItem="AMP-Uf-juw" secondAttribute="trailing" id="Wrr-XW-Bzs"/>
+                                    <constraint firstItem="zGb-Xo-84K" firstAttribute="top" secondItem="WeE-1C-VdW" secondAttribute="bottom" constant="7" id="aAa-Wy-ZDS"/>
                                     <constraint firstAttribute="bottom" secondItem="zGb-Xo-84K" secondAttribute="bottom" id="dV8-Ta-O1Y"/>
                                     <constraint firstItem="zGb-Xo-84K" firstAttribute="top" secondItem="AMP-Uf-juw" secondAttribute="bottom" id="fMd-rS-NOJ"/>
                                     <constraint firstItem="zGb-Xo-84K" firstAttribute="top" secondItem="06k-FJ-B7y" secondAttribute="top" constant="35" id="m7y-oj-7Wq"/>
@@ -159,9 +164,6 @@
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
