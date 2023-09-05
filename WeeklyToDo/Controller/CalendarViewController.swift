@@ -20,7 +20,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     var calendarDay : String = ""
 
     let realm = try! Realm()
-
+    let diaryModel = DiaryModel()
     var diaryModels: Results<DiaryModel>!
     var readRealmArray:[[String:String]] = []
 
@@ -60,23 +60,23 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
 
     //🟥削除
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                let reault = realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay))
-//                if let itemForDeletion = self.toDoItems?[indexPath.row] {
-                    do {
-                        //セルを削除してRealmデータベースに存在しないようにする
-                        try self.realm.write {
-                            self.realm.delete(reault[indexPath.row])
-                            filterReadRealm(calendarDay:calendarDay)
-                        }
-                    } catch {
-                        print("Error deleting category,\(error)")
-                    }
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-//            }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let reault = realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay))
+            //                if let itemForDeletion = self.toDoItems?[indexPath.row] {
+            do {
+                //セルを削除してRealmデータベースに存在しないようにする
+                try self.realm.write {
+                    self.realm.delete(reault[indexPath.row])
+                    filterReadRealm(calendarDay:calendarDay)
+                }
+            } catch {
+                print("Error deleting category,\(error)")
             }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            //            }
         }
+    }
     
     
     @IBAction func addButonPressed(_ sender: UIButton) {
@@ -149,13 +149,17 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         return nil
     }
 
+
+
     //FSCalendarで日付がタップされた時の処理は以下の関数を使用
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let tmpDate = Calendar(identifier: .gregorian)
         let year = tmpDate.component(.year, from: date)
         let month = tmpDate.component(.month, from: date)
         let day = tmpDate.component(.day, from: date)
-        dateLabel.text = "\(year)年\(month)月\(day)日"
+        let m = String(format: "%02d", month)
+        let d = String(format: "%02d", day)
+        dateLabel.text = "\(year)/\(m)/\(d)"
         calendarDay = dateLabel.text ?? ""
         print("\(calendarDay)")
         self.filterReadRealm(calendarDay:calendarDay)
@@ -163,92 +167,35 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         self.tableView.reloadData()
     }
 
-    func filterReadRealm(calendarDay:String) {
-        do{
-            self.readRealmArray = []
+    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let calendarImage = UIImage(named: "calendar")
 
-            for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
-
-                self.readRealmArray.append(["RealmTitle":filterReadResult.title,"RealmContent":filterReadResult.content])
+        //カレンダーの中の
+        let calendarEvent = formatter.string(from: date)
+        //保存している全データ取得
+        let didSetDay = realm.objects(DiaryModel.self)
+        var hasEvent: Bool = false
+        for diaryModels in didSetDay {
+            if diaryModels.date  == calendarEvent {
+                hasEvent = true
             }
-        }catch{
-
-            print(error.localizedDescription)
-
+        }
+        if hasEvent == true {
+            return calendarImage
+        } else {
+            return nil
         }
     }
 
+    func filterReadRealm(calendarDay:String) {
+
+        self.readRealmArray = []
+
+        for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
+
+            self.readRealmArray.append(["RealmTitle":filterReadResult.title,"RealmContent":filterReadResult.content])
+        }
+    }
 }
-//カレンダーで、日にちをタップしたら、TableViewにその日のイベントを表示するようにしていきます。
-//    //まず、保存されたデータの取得関数は下記
-//    func getModel() {
-//        let results = realm.objects(DiaryModel.self)
-//        var diaryModels: [[String:String]] = []
-//        for result in results {
-//            diaryModels.append(["title": result.title,
-//                                "content": result.content,
-//                                "date": result.date])
-//        }
-//    }
-
-    //        //スケジュール取得
-    //                let realm = try! Realm()
-    //                var result = realm.objects(DiaryModel.self)
-    ////        "\(year)/\(month)/\(day)"
-    //                result = result.filter("date = '\(calendarDay)'")
-    //                print(result)
-    //                for ev in result {
-    //                    if diaryModel.date {
-    //                        titleText.text = ev.title
-    //                        labelDate.textColor = .black
-    //                        view.addSubview(labelDate)
-    //                    }
-    //                }
-
-    //    func getModel() {
-    //        let results = diaryModels?.filter("date == %@", calendarDay)
-    ////        realm.objects(Person.self).filter("age >= 20")
-    //        for result in results {
-    //            eventModels.append(["title": result.title,
-    //                                "memo": result.memo,
-    //                                "date": result.date,
-    //                                "start_time": result.start_time,
-    //                                "end_time": result.end_time])
-    //        }
-    //    }
-
-
-//        let calendarDate = Calendar(identifier: .gregorian)
-//        let year = calendarDate.component(.year, from: date)
-//        let month = calendarDate.component(.month, from: date)
-//        let day = calendarDate.component(.day, from: date)
-//
-//        if UserDefaults.standard.object(forKey: "addORLook") as! String == "追加" {
-//
-//        createTextFieldAlert(calendarDay: "\(year)年\(month)月\(day)日")
-//
-//        }else{
-//
-//            self.realmCRUDModel.filterReadRealm(calendarDay: "\(year)年\(month)月\(day)日")
-//            self.tableView.reloadData()
-//
-//        }
-
-
-
-    //選択された日のイベントのみを取り出す
-//    func filterModel() {
-//        var filterdEvents: [[String:String]] = []
-//        for diaryModel in diaryModels {
-//            if diaryModel["date"] == stringFromDate(date: selectedDate as Date, format: "yyyy.MM.dd") {
-//                filterdEvents.append(diaryModel)
-//            }
-//        }
-//        filterdModels = filterdEvents
-//    }
-//    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-////        filterModel()
-//        tableView.reloadData()
-//    }
-
-
