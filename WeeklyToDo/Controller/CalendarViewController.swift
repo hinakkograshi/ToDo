@@ -78,6 +78,11 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     
     
     @IBAction func addButonPressed(_ sender: UIButton) {
+        if calendarDay == "" {
+            let alert = UIAlertController(title: "日付が選択されてません", message: "カレンダーから日付を選択してください。", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true, completion: nil)
+        }
 
         let diaryVC = UIStoryboard(name: "Diary", bundle: nil).instantiateViewController(withIdentifier: "Diary") as! DiaryViewController
         diaryVC.day = calendarDay
