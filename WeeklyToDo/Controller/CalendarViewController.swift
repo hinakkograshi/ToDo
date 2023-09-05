@@ -42,7 +42,8 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("モーダルから戻ったよ")
-        tableView.reloadData()
+        self.filterReadRealm(calendarDay:calendarDay)
+        self.tableView.reloadData()
     }
 
 
@@ -54,8 +55,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
         cell.titleText.text = readRealmArray[indexPath.row]["RealmTitle"]
         cell.contentText.text = readRealmArray[indexPath.row]["RealmContent"]
-        print("\(cell.titleText.text)")
-        print("\(cell.contentText.text)")
         return cell
     }
 
@@ -63,7 +62,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let reault = realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay))
-            //                if let itemForDeletion = self.toDoItems?[indexPath.row] {
             do {
                 //セルを削除してRealmデータベースに存在しないようにする
                 try self.realm.write {
@@ -149,8 +147,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         return nil
     }
 
-
-
     //FSCalendarで日付がタップされた時の処理は以下の関数を使用
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         let tmpDate = Calendar(identifier: .gregorian)
@@ -163,11 +159,11 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         calendarDay = dateLabel.text ?? ""
         print("\(calendarDay)")
         self.filterReadRealm(calendarDay:calendarDay)
-
         self.tableView.reloadData()
     }
 
     func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         let calendarImage = UIImage(named: "calendar")

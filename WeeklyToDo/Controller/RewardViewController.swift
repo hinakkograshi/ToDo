@@ -61,7 +61,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         return cell
     }
-//🟩
+    //🟩
     //value: textField.text!
     func textFieldDidEndEditing(cell: ToDoListTableViewCell, value: String) {
         //変更されたセルのインデックスを取得する。
@@ -136,7 +136,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     }
 
-//🟥削除
+    //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let itemForDeletion = self.RewardList?[indexPath.row] {
@@ -148,9 +148,9 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 } catch {
                     print("Error deleting category,\(error)")
                 }
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
         }
-    }
     }
 
 

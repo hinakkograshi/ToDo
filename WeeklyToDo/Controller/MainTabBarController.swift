@@ -12,7 +12,6 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         // 各画面となるViewControllerを格納する変数を用意
         var viewControllers = [UIViewController]()
-
         // それぞれの画面の設定(tabの画像など)
         let tab1VC = UIStoryboard(name: "ToDoList", bundle: nil).instantiateInitialViewController()
         tab1VC?.tabBarItem = UITabBarItem(title: "ToDo", image: .init(systemName: "pencil.circle"),tag: 0)

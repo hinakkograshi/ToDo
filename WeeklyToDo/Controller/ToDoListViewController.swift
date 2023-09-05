@@ -59,7 +59,6 @@ class ToDoListViewController: ButtonBarPagerTabStripViewController {
         //管理されるViewControllerを返す処理
         let firstVC = UIStoryboard(name: "ToDo", bundle: nil).instantiateViewController(withIdentifier: "ToDo")
         let secondVC = UIStoryboard(name: "Reward", bundle: nil).instantiateViewController(withIdentifier: "Reward")
-
         let childViewControllers:[UIViewController] = [firstVC, secondVC]
         return childViewControllers
     }
