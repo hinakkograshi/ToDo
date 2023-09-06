@@ -162,7 +162,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func addButonPressed(_ sender: UIButton) {
         var textField = UITextField()
-        let alert = UIAlertController(title: "新しいカテゴリーを追加", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "タスクの追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "追加", style: .default) { action in
             
             let newItem = Item()
@@ -180,7 +180,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         alert.addAction(action)
         alert.addTextField { field in
             textField = field
-            textField.placeholder = "新しいカテゴリーを追加"
+            textField.placeholder = "新しくタスクを追加"
         }
         let cancelButton = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.cancel, handler: nil)
         alert.addAction(cancelButton)

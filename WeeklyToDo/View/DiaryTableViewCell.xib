@@ -32,8 +32,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfZ-Rn-dcB">
-                        <rect key="frame" x="16" y="47" width="288" height="3"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FfZ-Rn-dcB">
+                        <rect key="frame" x="16" y="47" width="288" height="2"/>
                         <color key="backgroundColor" red="0.98431372549999996" green="0.84705882349999995" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="3" id="GZp-BQ-NMX"/>

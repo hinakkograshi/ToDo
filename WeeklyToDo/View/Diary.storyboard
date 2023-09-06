@@ -80,7 +80,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gOO-mF-uFD"/>
-                        <color key="backgroundColor" red="1" green="0.97254901959999995" blue="0.60392156860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.99607843159999998" green="0.97254908080000002" blue="0.60392159219999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="gOO-mF-uFD" firstAttribute="trailing" secondItem="S7d-EG-ODf" secondAttribute="trailing" constant="30" id="7wu-9x-GKf"/>
                             <constraint firstItem="ywb-Il-Hfs" firstAttribute="leading" secondItem="gOO-mF-uFD" secondAttribute="leading" constant="30" id="CGE-C9-fBA"/>

@@ -58,6 +58,11 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //選択されてグレーになり、すぐに白に戻す
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
     //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
