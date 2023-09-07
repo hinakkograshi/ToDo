@@ -27,7 +27,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKF-ok-w9N">
-                        <rect key="frame" x="16" y="60" width="288" height="117"/>
+                        <rect key="frame" x="16" y="55" width="288" height="122"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -42,15 +42,15 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="pKF-ok-w9N" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="7xG-Du-n54"/>
+                    <constraint firstItem="FfZ-Rn-dcB" firstAttribute="bottom" secondItem="Vyk-yX-atx" secondAttribute="bottom" id="G7C-64-SBi"/>
                     <constraint firstAttribute="trailing" secondItem="pKF-ok-w9N" secondAttribute="trailing" constant="16" id="JQk-WI-3SO"/>
                     <constraint firstItem="FfZ-Rn-dcB" firstAttribute="leading" secondItem="Vyk-yX-atx" secondAttribute="leading" id="OTI-Le-EOa"/>
                     <constraint firstItem="Vyk-yX-atx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="PJb-1i-Ype"/>
                     <constraint firstItem="Vyk-yX-atx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="RJ4-9Y-9d5"/>
                     <constraint firstAttribute="bottom" secondItem="pKF-ok-w9N" secondAttribute="bottom" constant="3" id="V34-Wj-z6V"/>
                     <constraint firstItem="FfZ-Rn-dcB" firstAttribute="trailing" secondItem="Vyk-yX-atx" secondAttribute="trailing" id="VDF-1W-boy"/>
-                    <constraint firstItem="pKF-ok-w9N" firstAttribute="top" secondItem="FfZ-Rn-dcB" secondAttribute="bottom" constant="10" id="Zjf-z1-RQZ"/>
-                    <constraint firstItem="FfZ-Rn-dcB" firstAttribute="bottom" secondItem="Vyk-yX-atx" secondAttribute="bottom" id="q9y-bq-d3I"/>
                     <constraint firstAttribute="trailing" secondItem="Vyk-yX-atx" secondAttribute="trailing" constant="16" id="tCc-OY-BLg"/>
+                    <constraint firstItem="pKF-ok-w9N" firstAttribute="top" secondItem="Vyk-yX-atx" secondAttribute="bottom" constant="5" id="ye8-4D-SEO"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

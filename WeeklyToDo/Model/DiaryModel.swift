@@ -12,4 +12,8 @@ class DiaryModel: Object {
     @Persisted var title: String = ""
     @Persisted var content: String = ""
     @Persisted var date: String = ""
+    @Persisted var dateCreated = Date().description
+    override static func primaryKey() -> String? {
+            return "dateCreated"
+        }
 }

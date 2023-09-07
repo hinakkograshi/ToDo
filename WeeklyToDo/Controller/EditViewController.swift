@@ -1,26 +1,25 @@
 //
-//  DiaryViewController.swift
+//  EditViewController.swift
 //  WeeklyToDo
 //
-//  Created by Hina on 2023/09/02.
+//  Created by Hina on 2023/09/07.
 //
 
 import UIKit
 import RealmSwift
 
-class DiaryViewController: UIViewController {
+class EditViewController: UIViewController {
 
     @IBOutlet weak var titleText: UITextView!
     @IBOutlet weak var contentText: UITextView!
 
     @IBOutlet weak var dateLabel: UILabel!
-
     let realm = try! Realm()
     let diaryModel = DiaryModel()
     var day = ""
-//    var selectedDiaryTitle = ""
-//    var selectedDiaryContent = ""
-
+    var selectedDiaryTitle = ""
+    var selectedDiaryContent = ""
+    var selectedDateCreated = ""
 
 
     override func viewDidLoad() {
@@ -36,24 +35,29 @@ class DiaryViewController: UIViewController {
         contentText.layer.cornerRadius = 5
         contentText.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         dateLabel.text = day
-
-
+        titleText.text = selectedDiaryTitle
+        contentText.text = selectedDiaryContent
+        print("\(selectedDateCreated)")
+        
+//        titleText.text = selectedDiaryTitle
+//        contentText.text = selectedDiaryContent
     }
-    
+
     @IBAction func didTapCancel(_ sender: UIBarButtonItem) {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
-
-    //保存ボタンを押した際に保存
-    @IBAction func diarySave(_ sender: UIBarButtonItem) {
-        diaryModel.title = titleText.text  ?? ""
-        diaryModel.content = contentText.text ?? ""
-        diaryModel.date = dateLabel.text ?? ""
-        diaryModel.dateCreated = Date().description
-        
+    @IBAction func editButton(_ sender: Any) {
         try! realm.write {
-            realm.add(diaryModel)
+
+            diaryModel.title = titleText.text  ?? ""
+            diaryModel.content = contentText.text ?? ""
+            diaryModel.dateCreated = selectedDateCreated
+            diaryModel.date = day
+
+            realm.add(diaryModel, update: .modified)
         }
         self.dismiss(animated: true,completion: nil)
     }
+    
+
 }

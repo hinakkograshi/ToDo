@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5314FDCC2AA928C400030571 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5314FDCB2AA928C400030571 /* Edit.storyboard */; };
+		5314FDCE2AA9292300030571 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314FDCD2AA9292300030571 /* EditViewController.swift */; };
 		532A71612A9A342A00708CBE /* ToDoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */; };
 		532A71622A9A342A00708CBE /* ToDoListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532A71602A9A342A00708CBE /* ToDoListTableViewCell.xib */; };
 		532A71642A9A5B2C00708CBE /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A71632A9A5B2C00708CBE /* Item.swift */; };
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		1F381F0A98F7F5A291FA4A57 /* Pods-WeeklyToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeeklyToDo.release.xcconfig"; path = "Target Support Files/Pods-WeeklyToDo/Pods-WeeklyToDo.release.xcconfig"; sourceTree = "<group>"; };
+		5314FDCB2AA928C400030571 /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
+		5314FDCD2AA9292300030571 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDoListTableViewCell.swift; path = WeeklyToDo/View/ToDoListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		532A71602A9A342A00708CBE /* ToDoListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ToDoListTableViewCell.xib; path = WeeklyToDo/View/ToDoListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		532A71632A9A5B2C00708CBE /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 				533662602AA35320005B2DB6 /* Diary.storyboard */,
 				5356D60B2AA393180049EFB4 /* DiaryTableViewCell.swift */,
 				5356D60C2AA393180049EFB4 /* DiaryTableViewCell.xib */,
+				5314FDCB2AA928C400030571 /* Edit.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -112,6 +117,7 @@
 				5336AA8A2A9AEB680072585A /* RewardViewController.swift */,
 				533B76C62A90F17000CDF8A5 /* CalendarViewController.swift */,
 				533662622AA3549F005B2DB6 /* DiaryViewController.swift */,
+				5314FDCD2AA9292300030571 /* EditViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -243,6 +249,7 @@
 				5336AA852A9AD4F70072585A /* Reward.storyboard in Resources */,
 				5356D60E2AA393180049EFB4 /* DiaryTableViewCell.xib in Resources */,
 				533B76B92A90A17400CDF8A5 /* Main.storyboard in Resources */,
+				5314FDCC2AA928C400030571 /* Edit.storyboard in Resources */,
 				532A71622A9A342A00708CBE /* ToDoListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +309,7 @@
 				533B76C72A90F17000CDF8A5 /* CalendarViewController.swift in Sources */,
 				533B76B62A90A17400CDF8A5 /* ToDoViewController.swift in Sources */,
 				533662632AA3549F005B2DB6 /* DiaryViewController.swift in Sources */,
+				5314FDCE2AA9292300030571 /* EditViewController.swift in Sources */,
 				5336AA7D2A9AD4270072585A /* MainTabBarController.swift in Sources */,
 				535DB09D2A9CC52900DEACAB /* Reward.swift in Sources */,
 				5336AA8B2A9AEB680072585A /* RewardViewController.swift in Sources */,

@@ -20,6 +20,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     var calendarDay : String = ""
 
     let realm = try! Realm()
+    var diaryName: DiaryModel?
     let diaryModel = DiaryModel()
     var diaryModels: Results<DiaryModel>!
     var readRealmArray:[[String:String]] = []
@@ -36,6 +37,8 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         tableView.register(UINib(nibName: "DiaryTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+                    // MARK: id をキーとしてソートする
+        diaryModels = realm.objects(DiaryModel.self).sorted(byKeyPath: "dateCreated")
         tableView.reloadData()
     }
 
@@ -53,15 +56,37 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
+
+//        let diary = diaryModels[indexPath.row]
+//        cell.titleText.text = diary.title
+//        cell.contentText.text = diary.content
         cell.titleText.text = readRealmArray[indexPath.row]["RealmTitle"]
         cell.contentText.text = readRealmArray[indexPath.row]["RealmContent"]
+
+
         return cell
     }
-
+   //🍊
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
+        editVC.day = calendarDay
+        
+        editVC.selectedDiaryTitle = readRealmArray[indexPath.row]["RealmTitle"] ?? ""
+        editVC.selectedDiaryContent = readRealmArray[indexPath.row]["RealmContent"] ?? ""
+        editVC.selectedDateCreated = readRealmArray[indexPath.row]["RealmDate"]!
+
+        let navigationController = UINavigationController(rootViewController: editVC)
+        //🟥フルスクリーンにしないと閉じたことを認識されない
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
         //選択されてグレーになり、すぐに白に戻す
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    // テーブルビューの編集を許可
+      func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+          return true
+      }
 
     //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -77,7 +102,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
                 print("Error deleting category,\(error)")
             }
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            //            }
+            tableView.reloadData()
         }
     }
     
@@ -201,7 +226,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
         for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
 
-            self.readRealmArray.append(["RealmTitle":filterReadResult.title,"RealmContent":filterReadResult.content])
+            self.readRealmArray.append(["RealmTitle":filterReadResult.title,"RealmContent":filterReadResult.content,"RealmDate":filterReadResult.dateCreated])
         }
     }
 }

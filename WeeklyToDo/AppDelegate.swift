@@ -20,9 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
 
-        
         do {
-            let realm = try Realm()
+            _ = try Realm()
         } catch {
             print("Error initialising new realm\(error)")
         }
