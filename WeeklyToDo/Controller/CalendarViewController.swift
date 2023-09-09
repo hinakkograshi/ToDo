@@ -19,11 +19,13 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var dateLabel: UILabel!
     var calendarDay : String = ""
 
-    let realm = try! Realm()
+//    let realm = try! Realm()
     var diaryName: DiaryModel?
     let diaryModel = DiaryModel()
     var diaryModels: Results<DiaryModel>!
-    var readRealmArray:[[String:String]] = []
+//    var readRealmArray:[[String:String]] = []
+//    var readRealmArray:[Content] = []
+    let viewModel = CalendarViewModel();
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,19 +46,22 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("モーダルから戻ったよ")
-        self.filterReadRealm(calendarDay:calendarDay)
+        viewModel.filterReadRealm(calendarDay:calendarDay)
         self.tableView.reloadData()
     }
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return readRealmArray.count
+//        return readRealmArray.count
+        return viewModel.getCount();
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
-        cell.titleText.text = readRealmArray[indexPath.row]["RealmTitle"]
-        cell.contentText.text = readRealmArray[indexPath.row]["RealmContent"]
+//        cell.titleText.text = readRealmArray[indexPath.row].title
+//        cell.contentText.text = readRealmArray[indexPath.row].content
+        cell.titleText = viewModel.getResult()[indexPath.row].title;
+        cell.contentText.text = viewModel.getResult()[indexPath.row].content
 
         return cell
     }
@@ -65,9 +70,9 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
         editVC.day = calendarDay
         
-        editVC.selectedDiaryTitle = readRealmArray[indexPath.row]["RealmTitle"] ?? ""
-        editVC.selectedDiaryContent = readRealmArray[indexPath.row]["RealmContent"] ?? ""
-        editVC.selectedDateCreated = readRealmArray[indexPath.row]["RealmDate"]!
+        editVC.selectedDiaryTitle = readRealmArray[indexPath.row].title
+        editVC.selectedDiaryContent = readRealmArray[indexPath.row].content
+        editVC.selectedDateCreated = readRealmArray[indexPath.row].date
 
         let navigationController = UINavigationController(rootViewController: editVC)
         //🟥フルスクリーンにしないと閉じたことを認識されない
@@ -90,7 +95,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
                 //セルを削除してRealmデータベースに存在しないようにする
                 try self.realm.write {
                     self.realm.delete(reault[indexPath.row])
-                    filterReadRealm(calendarDay:calendarDay)
+                    viewModel.filterReadRealm(calendarDay:calendarDay)
                 }
             } catch {
                 print("Error deleting category,\(error)")
@@ -186,7 +191,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         dateLabel.text = "\(year)/\(m)/\(d)"
         calendarDay = dateLabel.text ?? ""
         print("\(calendarDay)")
-        self.filterReadRealm(calendarDay:calendarDay)
+        viewModel.filterReadRealm(calendarDay:calendarDay)
         self.tableView.reloadData()
     }
 
@@ -213,13 +218,23 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         }
     }
 
-    func filterReadRealm(calendarDay:String) {
+//    func filterReadRealm(calendarDay:String) {
+//        // calendarDay : 2023/09/09
+//        self.readRealmArray = []
+//
+//        for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
+//            let content = Content(
+//                title: filterReadResult.title,
+//                content: filterReadResult.content,
+//                date: filterReadResult.dateCreated
+//            )
+//            self.readRealmArray.append(content)
+//        }
+//    }
+}
 
-        self.readRealmArray = []
-
-        for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
-
-            self.readRealmArray.append(["RealmTitle":filterReadResult.title,"RealmContent":filterReadResult.content,"RealmDate":filterReadResult.dateCreated])
-        }
-    }
+struct Content {
+    let title: String;
+    let content: String;
+    let date: String;
 }
