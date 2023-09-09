@@ -55,13 +55,8 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
-
-//        let diary = diaryModels[indexPath.row]
-//        cell.titleText.text = diary.title
-//        cell.contentText.text = diary.content
         cell.titleText.text = readRealmArray[indexPath.row]["RealmTitle"]
         cell.contentText.text = readRealmArray[indexPath.row]["RealmContent"]
-
 
         return cell
     }
@@ -145,7 +140,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
         // CalculateCalendarLogic()：祝日判定のインスタンスの生成
         let holiday = CalculateCalendarLogic()
-
         return holiday.judgeJapaneseHoliday(year: year, month: month, day: day)
     }
     // date型 -> 年月日をIntで取得
