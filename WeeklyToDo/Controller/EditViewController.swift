@@ -38,9 +38,6 @@ class EditViewController: UIViewController {
         titleText.text = selectedDiaryTitle
         contentText.text = selectedDiaryContent
         print("\(selectedDateCreated)")
-        
-//        titleText.text = selectedDiaryTitle
-//        contentText.text = selectedDiaryContent
     }
 
     @IBAction func didTapCancel(_ sender: UIBarButtonItem) {

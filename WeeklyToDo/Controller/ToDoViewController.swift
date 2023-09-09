@@ -100,7 +100,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
     //ユーザーが並び替えを行うと、UITableViewはUIを更新します
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         

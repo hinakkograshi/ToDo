@@ -25,7 +25,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     var diaryModels: Results<DiaryModel>!
     var readRealmArray:[[String:String]] = []
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

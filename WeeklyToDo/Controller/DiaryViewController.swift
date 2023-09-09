@@ -18,10 +18,6 @@ class DiaryViewController: UIViewController {
     let realm = try! Realm()
     let diaryModel = DiaryModel()
     var day = ""
-//    var selectedDiaryTitle = ""
-//    var selectedDiaryContent = ""
-
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +32,6 @@ class DiaryViewController: UIViewController {
         contentText.layer.cornerRadius = 5
         contentText.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         dateLabel.text = day
-
-
     }
     
     @IBAction func didTapCancel(_ sender: UIBarButtonItem) {
