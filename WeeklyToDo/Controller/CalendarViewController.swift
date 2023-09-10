@@ -194,13 +194,12 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        let calendarImage = UIImage(named: "calendar")
 
         //カレンダーの中の
         let calendarEvent = formatter.string(from: date)
         let hasEvent = !realm.objects(DiaryModel.self).where({$0.date == calendarEvent}).isEmpty
         if hasEvent == true {
-            return calendarImage
+            return UIImage(named: "calendar")
         } else {
             return nil
         }
