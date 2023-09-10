@@ -198,14 +198,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
         //カレンダーの中の
         let calendarEvent = formatter.string(from: date)
-        //保存している全データ取得
-        let didSetDay = realm.objects(DiaryModel.self)
-        var hasEvent: Bool = false
-        for diaryModels in didSetDay {
-            if diaryModels.date  == calendarEvent {
-                hasEvent = true
-            }
-        }
+        let hasEvent = !realm.objects(DiaryModel.self).where({$0.date == calendarEvent}).isEmpty
         if hasEvent == true {
             return calendarImage
         } else {
