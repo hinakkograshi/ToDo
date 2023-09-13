@@ -18,14 +18,9 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var dateLabel: UILabel!
     var calendarDay : String = ""
-    //FatViewController
-    let realm = try! Realm()
-    var diaryName: DiaryModel?
-    let diaryModel = DiaryModel()
-    var diaryModels: Results<DiaryModel>!
-    var readRealmArray:[Contents] = []
+
     let realmCRUDModel = RealmCRUDModel()
-    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +34,8 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.register(UINib(nibName: "DiaryTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         // MARK: id をキーとしてソートする
-        diaryModels = realm.objects(DiaryModel.self).sorted(byKeyPath: "dateCreated")
+        realmCRUDModel.sortedRead()
+        //        diaryModels = realm.objects(DiaryModel.self).sorted(byKeyPath: "dateCreated")
         tableView.reloadData()
     }
 
@@ -47,14 +43,12 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated)
         print("モーダルから戻ったよ")
         realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //po 0になってる
         return realmCRUDModel.getCount()
-
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,10 +62,9 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
         editVC.day = calendarDay
-        
         editVC.selectedDiaryTitle = realmCRUDModel.readRealmArray[indexPath.row].title
         editVC.selectedDiaryContent = realmCRUDModel.readRealmArray[indexPath.row].content
-        editVC.selectedDateCreated = realmCRUDModel.readRealmArray[indexPath.row].date
+        editVC.selectedDateCreated = realmCRUDModel.readRealmArray[indexPath.row].dateCreated
 
         let navigationController = UINavigationController(rootViewController: editVC)
         //🟥フルスクリーンにしないと閉じたことを認識されない
@@ -86,25 +79,26 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         return true
     }
 
-//🟥削除のインデックスパスをRealmに持たせ方がわからなかった
+    //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let reault = realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay))
-            do {
-                //セルを削除してRealmデータベースに存在しないようにする
-                try self.realm.write {
-                    self.realm.delete(reault[indexPath.row])
-                    realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
-                }
-            } catch {
-                print("Error deleting category,\(error)")
-            }
+            realmCRUDModel.deleteRealm(calendarDay: calendarDay, index: indexPath.row)
+            //            let reault = realmCRUDModel.calendarDayRead(calendarDay: calendarDay)
+            //            do {
+            //                //セルを削除してRealmデータベースに存在しないようにする
+            //                try self.realm.write {
+            //                    self.realm.delete(reault[indexPath.row])
+            //                    realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
+            //                }
+            //            } catch {
+            //                print("Error deleting category,\(error)")
+            //            }
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.reloadData()
         }
     }
-    
-    
+
+
     @IBAction func addButonPressed(_ sender: UIButton) {
         if calendarDay == "" {
             let alert = UIAlertController(title: "日付が選択されてません", message: "カレンダーから日付を選択してください。", preferredStyle: .alert)
@@ -115,7 +109,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let diaryVC = UIStoryboard(name: "Diary", bundle: nil).instantiateViewController(withIdentifier: "Diary") as! DiaryViewController
         diaryVC.day = calendarDay
         let navigationController = UINavigationController(rootViewController: diaryVC)
-        //🟩フルスクリーンにしないと閉じたことを認識されない
+        //🟥フルスクリーンにしないと閉じたことを認識されない
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
@@ -191,27 +185,17 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         calendarDay = dateLabel.text ?? ""
         print("\(calendarDay)")
         realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
-    //🟩文法理解する！！！
+
     func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        //        let calendarImage = UIImage(named: "calendar")
 
-        //カレンダーの中の
         let calendarEvent = formatter.string(from: date)
-//🟥Modelにどう持たせるか？
-        let hasEvent = !realm.objects(DiaryModel.self).where({$0.date == calendarEvent}).isEmpty
-        //保存している全データ取得
-        //        let didSetDay = realm.objects(DiaryModel.self)
-        //        var hasEvent: Bool = false
-        //        for diaryModels in didSetDay {
-        //            if diaryModels.date  == calendarEvent {
-        //                hasEvent = true
-        //            }
-        //        }
+        //🟥Modelにどう持たせるか？
+        let hasEvent = !realmCRUDModel.eventRead(calendarEvent: calendarEvent).isEmpty
         if hasEvent == true {
             return UIImage(named: "calendar")
         } else {
@@ -219,24 +203,3 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         }
     }
 }
-
-//    func filterReadRealm(calendarDay:String) {
-//        //2023/9/9
-//
-//        self.readRealmArray = []
-//
-//        for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
-//            let contents = Contents(
-//                title: filterReadResult.title ,
-//                content: filterReadResult.content,
-//                date: filterReadResult.date)
-//            readRealmArray.append(contents)
-//        }
-//    }
-//
-//    struct Contents {
-//        let title: String
-//        let content:String
-//        let date: String
-//    }
-

@@ -10,62 +10,101 @@ import RealmSwift
 
 class RealmCRUDModel {
     let realm = try! Realm()
+    let diaryModel = DiaryModel()
     var readRealmArray:[Contents] = []
-
+    var diaryModels: Results<DiaryModel>!
 }
 //Create
 extension RealmCRUDModel {
     func createRealm(realmTitle: String, realmContent: String, realmDate: String, realmDateCreated: String) {
-        let diaryModel = DiaryModel()
+
         diaryModel.title = realmTitle
         diaryModel.content = realmContent
         diaryModel.date = realmDate
         diaryModel.dateCreated = realmDateCreated
-        
+
         try! realm.write {
             realm.add(diaryModel)
         }
+    }
+}
+//Update
+extension RealmCRUDModel {
+    func updateRealm(updateTitle: String, updateContent: String, updateDate: String, updateDateCreated: String) {
+
+        try! realm.write {
+            diaryModel.title = updateTitle
+            diaryModel.content = updateContent
+            diaryModel.date = updateDate
+            diaryModel.dateCreated = updateDateCreated
+            realm.add(diaryModel, update: .modified)
+        }
+    }
+}
+
+//Read
+
+extension RealmCRUDModel {
+    func calendarDayRead(calendarDay:String) -> Results<DiaryModel> {
+        let result = realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay))
+        return result
+    }
+}
+extension RealmCRUDModel {
+    func eventRead(calendarEvent:String) -> Results<DiaryModel> {
+        let event = realm.objects(DiaryModel.self).where({$0.date == calendarEvent})
+        return event
+    }
+}
+extension RealmCRUDModel {
+    func sortedRead() -> Results<DiaryModel> {
+        let sort = realm.objects(DiaryModel.self).sorted(byKeyPath: "dateCreated")
+        return sort
     }
 }
 
 extension RealmCRUDModel {
     func filterReadRealm(calendarDay:String) {
         //2023/9/9
-        var readRealmArray:[Contents] = []
-
         for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
             let contents = Contents(
-                title: filterReadResult.title ,
+                title: filterReadResult.title,
                 content: filterReadResult.content,
-                date: filterReadResult.date)
+                date: filterReadResult.date,
+                dateCreated: filterReadResult.dateCreated
+            )
             readRealmArray.append(contents)
         }
     }
 }
-struct Contents {
-    let title: String
-    let content:String
-    let date: String
-}
+
 extension RealmCRUDModel {
-    func deleteReadRealm(calendarDay:String) {
-        let reault = realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay))
+    func deleteRealm(calendarDay:String, index: Int) {
+        let reault = calendarDayRead(calendarDay: calendarDay)
 
-
-       try! realm.write {
-//🟥indexPath.rowここに持たせれない。
-//           self.realm.delete(reault[indexPath.row])
-            filterReadRealm(calendarDay:calendarDay)
+            //セルを削除してRealmデータベースに存在しないようにする
+            try! self.realm.write {
+                self.realm.delete(reault[index])
+                filterReadRealm(calendarDay:calendarDay)
+            }
         }
     }
-}
+
 extension RealmCRUDModel {
-//    func getResult()-> [Conents]{
-//        return [];
-//    }
+    func getResult()-> [Contents] {
+       return  []
+
+    }
 
     func getCount() -> Int {
         return readRealmArray.count
     }
+}
+
+struct Contents {
+    let title: String
+    let content:String
+    let date: String
+    let dateCreated: String
 }
 

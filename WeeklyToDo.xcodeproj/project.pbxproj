@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5304D7702AAD9DFA00819FB9 /* CalenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304D76F2AAD9DFA00819FB9 /* CalenderViewModel.swift */; };
 		5314FDCC2AA928C400030571 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5314FDCB2AA928C400030571 /* Edit.storyboard */; };
 		5314FDCE2AA9292300030571 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314FDCD2AA9292300030571 /* EditViewController.swift */; };
 		532A71612A9A342A00708CBE /* ToDoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */; };
@@ -39,7 +38,6 @@
 
 /* Begin PBXFileReference section */
 		1F381F0A98F7F5A291FA4A57 /* Pods-WeeklyToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeeklyToDo.release.xcconfig"; path = "Target Support Files/Pods-WeeklyToDo/Pods-WeeklyToDo.release.xcconfig"; sourceTree = "<group>"; };
-		5304D76F2AAD9DFA00819FB9 /* CalenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderViewModel.swift; sourceTree = "<group>"; };
 		5314FDCB2AA928C400030571 /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		5314FDCD2AA9292300030571 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDoListTableViewCell.swift; path = WeeklyToDo/View/ToDoListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -91,7 +89,6 @@
 				535DB09C2A9CC52900DEACAB /* Reward.swift */,
 				533662662AA37015005B2DB6 /* DiaryModel.swift */,
 				534CB8762AAD480E00987CF3 /* RealmCRUDModel.swift */,
-				5304D76F2AAD9DFA00819FB9 /* CalenderViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,7 +318,6 @@
 				5336AA8B2A9AEB680072585A /* RewardViewController.swift in Sources */,
 				532A71612A9A342A00708CBE /* ToDoListTableViewCell.swift in Sources */,
 				533B76B22A90A17400CDF8A5 /* AppDelegate.swift in Sources */,
-				5304D7702AAD9DFA00819FB9 /* CalenderViewModel.swift in Sources */,
 				532A71642A9A5B2C00708CBE /* Item.swift in Sources */,
 				533B76B42A90A17400CDF8A5 /* SceneDelegate.swift in Sources */,
 				534CB8772AAD480E00987CF3 /* RealmCRUDModel.swift in Sources */,
