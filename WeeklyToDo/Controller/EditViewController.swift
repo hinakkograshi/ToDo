@@ -6,16 +6,14 @@
 //
 
 import UIKit
-import RealmSwift
 
 class EditViewController: UIViewController {
 
     @IBOutlet weak var titleText: UITextView!
     @IBOutlet weak var contentText: UITextView!
-
     @IBOutlet weak var dateLabel: UILabel!
-    let realm = try! Realm()
-    let diaryModel = DiaryModel()
+
+    let realmCRUDModel = RealmCRUDModel()
     var day = ""
     var selectedDiaryTitle = ""
     var selectedDiaryContent = ""
@@ -44,17 +42,7 @@ class EditViewController: UIViewController {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     @IBAction func editButton(_ sender: Any) {
-        try! realm.write {
-
-            diaryModel.title = titleText.text  ?? ""
-            diaryModel.content = contentText.text ?? ""
-            diaryModel.dateCreated = selectedDateCreated
-            diaryModel.date = day
-
-            realm.add(diaryModel, update: .modified)
-        }
+        realmCRUDModel.updateRealm(updateTitle: titleText.text  ?? "", updateContent: contentText.text ?? "", updateDate: day, updateDateCreated: selectedDateCreated)
         self.dismiss(animated: true,completion: nil)
     }
-    
-
 }

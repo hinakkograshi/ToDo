@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class DiaryViewController: UIViewController {
 
@@ -15,8 +14,8 @@ class DiaryViewController: UIViewController {
 
     @IBOutlet weak var dateLabel: UILabel!
 
-    let realm = try! Realm()
-    let diaryModel = DiaryModel()
+
+    let realmCRUDModel = RealmCRUDModel()
     var day = ""
 
     override func viewDidLoad() {
@@ -40,14 +39,7 @@ class DiaryViewController: UIViewController {
 
     //保存ボタンを押した際に保存
     @IBAction func diarySave(_ sender: UIBarButtonItem) {
-        diaryModel.title = titleText.text  ?? ""
-        diaryModel.content = contentText.text ?? ""
-        diaryModel.date = dateLabel.text ?? ""
-        diaryModel.dateCreated = Date().description
-        
-        try! realm.write {
-            realm.add(diaryModel)
-        }
+        realmCRUDModel.createRealm(realmTitle: titleText.text  ?? "", realmContent: contentText.text ?? "", realmDate: dateLabel.text ?? "", realmDateCreated: Date().description)
         self.dismiss(animated: true,completion: nil)
     }
 }

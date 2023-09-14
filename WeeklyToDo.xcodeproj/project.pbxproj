@@ -29,6 +29,7 @@
 		533B76BB2A90A17400CDF8A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 533B76BA2A90A17400CDF8A5 /* Assets.xcassets */; };
 		533B76BE2A90A17400CDF8A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533B76BC2A90A17400CDF8A5 /* LaunchScreen.storyboard */; };
 		533B76C72A90F17000CDF8A5 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B76C62A90F17000CDF8A5 /* CalendarViewController.swift */; };
+		534CB8772AAD480E00987CF3 /* RealmCRUDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CB8762AAD480E00987CF3 /* RealmCRUDModel.swift */; };
 		5356D60D2AA393180049EFB4 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5356D60B2AA393180049EFB4 /* DiaryTableViewCell.swift */; };
 		5356D60E2AA393180049EFB4 /* DiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5356D60C2AA393180049EFB4 /* DiaryTableViewCell.xib */; };
 		535DB09D2A9CC52900DEACAB /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DB09C2A9CC52900DEACAB /* Reward.swift */; };
@@ -86,6 +87,7 @@
 				532A71632A9A5B2C00708CBE /* Item.swift */,
 				535DB09C2A9CC52900DEACAB /* Reward.swift */,
 				533662662AA37015005B2DB6 /* DiaryModel.swift */,
+				534CB8762AAD480E00987CF3 /* RealmCRUDModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -317,6 +319,7 @@
 				533B76B22A90A17400CDF8A5 /* AppDelegate.swift in Sources */,
 				532A71642A9A5B2C00708CBE /* Item.swift in Sources */,
 				533B76B42A90A17400CDF8A5 /* SceneDelegate.swift in Sources */,
+				534CB8772AAD480E00987CF3 /* RealmCRUDModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
