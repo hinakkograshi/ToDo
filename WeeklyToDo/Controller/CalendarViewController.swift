@@ -8,7 +8,6 @@
 import UIKit
 import FSCalendar
 import CalculateCalendarLogic
-import RealmSwift
 
 class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance{
 
@@ -18,9 +17,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var dateLabel: UILabel!
     var calendarDay : String = ""
-
     let realmCRUDModel = RealmCRUDModel()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +31,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.register(UINib(nibName: "DiaryTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         // MARK: id をキーとしてソートする
-        realmCRUDModel.sortedRead()
+//        realmCRUDModel.sortedRead()
         //        diaryModels = realm.objects(DiaryModel.self).sorted(byKeyPath: "dateCreated")
         tableView.reloadData()
     }
@@ -48,11 +45,15 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return realmCRUDModel.getCount()
+
+        return realmCRUDModel.readRealmArray.count
+//        realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
+//        return realmCRUDModel.getCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
+//        realmCRUDModel.calendarDayRead(calendarDay: calendarDay)
         cell.titleText.text = realmCRUDModel.readRealmArray[indexPath.row].title
         cell.contentText.text = realmCRUDModel.readRealmArray[indexPath.row].content
 
@@ -83,16 +84,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             realmCRUDModel.deleteRealm(calendarDay: calendarDay, index: indexPath.row)
-            //            let reault = realmCRUDModel.calendarDayRead(calendarDay: calendarDay)
-            //            do {
-            //                //セルを削除してRealmデータベースに存在しないようにする
-            //                try self.realm.write {
-            //                    self.realm.delete(reault[indexPath.row])
-            //                    realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
-            //                }
-            //            } catch {
-            //                print("Error deleting category,\(error)")
-            //            }
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.reloadData()
         }
