@@ -47,6 +47,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         super.viewWillAppear(animated)
         print("モーダルから戻ったよ")
         realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
+        calendar.reloadData()
         tableView.reloadData()
     }
 
@@ -92,6 +93,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         if editingStyle == .delete {
             realmCRUDModel.deleteRealm(calendarDay: calendarDay, index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            calendar.reloadData()
             tableView.reloadData()
         }
     }
@@ -160,7 +162,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         if self.judgeHoliday(date){
             return UIColor.red
         }
-
         //土日の判定を行う（土曜日は青色、日曜日は赤色で表示する）
         let weekday = self.getWeekIdx(date)
         if weekday == 1 {   //日曜日
