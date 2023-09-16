@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import XLPagerTabStrip
+import StoreKit
 
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate, ChangeDelegate {
@@ -33,6 +34,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = 60.0
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         setDismissKeyboard()
+        //自動でレビュー画面表示
+        if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            SKStoreReviewController.requestReview(in: scene)
+        }
         //🟥忘れるな
         tableView.reloadData()
     }
@@ -49,6 +54,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoItems.count
+    }
+    //ToDoリストが3以上ならレビュー画面表示
+    private func requestAppStoreReview() {
+        guard toDoItems.count >= 3 else { return }
     }
     
     //🟥customCell

@@ -9,18 +9,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="cen-bJ-mfL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nr5-Aj-UNi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="pencil.circle.fill" catalog="system" id="Ci1-9j-c7J"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="46d-9j-3yf">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <navigationBarAppearance key="standardAppearance"/>
                         <navigationBarAppearance key="scrollEdgeAppearance">
-                            <color key="backgroundColor" red="1" green="0.72156862745098038" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <textAttributes key="titleTextAttributes">
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </textAttributes>
@@ -83,7 +82,11 @@
                             <constraint firstItem="mYl-Db-uGM" firstAttribute="bottom" secondItem="g3E-IG-dij" secondAttribute="bottom" id="tmA-xv-foW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Weekly ToDo" id="bbg-9I-9sN"/>
+                    <navigationItem key="navigationItem" title="Weekly ToDo" id="bbg-9I-9sN">
+                        <barButtonItem key="leftBarButtonItem" image="questionmark.circle" catalog="system" id="1N3-Oi-HHF">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="SkK-io-Avw" id="GaK-Nb-Lph"/>
                         <outlet property="containerView" destination="g3E-IG-dij" id="eGV-ec-aHu"/>
@@ -95,7 +98,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pencil.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
