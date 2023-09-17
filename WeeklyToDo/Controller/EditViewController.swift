@@ -15,9 +15,9 @@ class EditViewController: UIViewController {
 
     let realmCRUDModel = RealmCRUDModel()
     var day = ""
-    var selectedDiaryTitle = ""
-    var selectedDiaryContent = ""
-    var selectedDateCreated = ""
+    private var selectedDiaryTitle = ""
+    private var selectedDiaryContent = ""
+    private var selectedDateCreated = ""
 
 
     override func viewDidLoad() {
@@ -46,8 +46,11 @@ class EditViewController: UIViewController {
         self.dismiss(animated: true,completion: nil)
     }
     
-    static func make() -> EditViewController {
+    static func make(contents: Contents) -> EditViewController {
         let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
+        editVC.selectedDiaryTitle = contents.title
+        editVC.selectedDiaryContent = contents.content
+        editVC.selectedDateCreated = contents.dateCreated
         return editVC;
     }
 }
