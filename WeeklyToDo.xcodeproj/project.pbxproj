@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		530A725C2AB5DA41009D2B67 /* HelpList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 530A725B2AB5DA41009D2B67 /* HelpList.storyboard */; };
+		530A72602AB5DB8D009D2B67 /* HelpListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530A725F2AB5DB8D009D2B67 /* HelpListViewController.swift */; };
 		5314FDCC2AA928C400030571 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5314FDCB2AA928C400030571 /* Edit.storyboard */; };
 		5314FDCE2AA9292300030571 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5314FDCD2AA9292300030571 /* EditViewController.swift */; };
+		531725A92AB65F66007978FA /* HelpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531725A72AB65F66007978FA /* HelpTableViewCell.swift */; };
+		531725AA2AB65F66007978FA /* HelpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 531725A82AB65F66007978FA /* HelpTableViewCell.xib */; };
 		532A71612A9A342A00708CBE /* ToDoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */; };
 		532A71622A9A342A00708CBE /* ToDoListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532A71602A9A342A00708CBE /* ToDoListTableViewCell.xib */; };
 		532A71642A9A5B2C00708CBE /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A71632A9A5B2C00708CBE /* Item.swift */; };
@@ -38,8 +42,12 @@
 
 /* Begin PBXFileReference section */
 		1F381F0A98F7F5A291FA4A57 /* Pods-WeeklyToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeeklyToDo.release.xcconfig"; path = "Target Support Files/Pods-WeeklyToDo/Pods-WeeklyToDo.release.xcconfig"; sourceTree = "<group>"; };
+		530A725B2AB5DA41009D2B67 /* HelpList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HelpList.storyboard; sourceTree = "<group>"; };
+		530A725F2AB5DB8D009D2B67 /* HelpListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpListViewController.swift; sourceTree = "<group>"; };
 		5314FDCB2AA928C400030571 /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		5314FDCD2AA9292300030571 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		531725A72AB65F66007978FA /* HelpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTableViewCell.swift; sourceTree = "<group>"; };
+		531725A82AB65F66007978FA /* HelpTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpTableViewCell.xib; sourceTree = "<group>"; };
 		532A715F2A9A342A00708CBE /* ToDoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToDoListTableViewCell.swift; path = WeeklyToDo/View/ToDoListTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		532A71602A9A342A00708CBE /* ToDoListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ToDoListTableViewCell.xib; path = WeeklyToDo/View/ToDoListTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		532A71632A9A5B2C00708CBE /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -107,6 +115,9 @@
 				5356D60B2AA393180049EFB4 /* DiaryTableViewCell.swift */,
 				5356D60C2AA393180049EFB4 /* DiaryTableViewCell.xib */,
 				5314FDCB2AA928C400030571 /* Edit.storyboard */,
+				530A725B2AB5DA41009D2B67 /* HelpList.storyboard */,
+				531725A72AB65F66007978FA /* HelpTableViewCell.swift */,
+				531725A82AB65F66007978FA /* HelpTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -121,6 +132,7 @@
 				533B76C62A90F17000CDF8A5 /* CalendarViewController.swift */,
 				533662622AA3549F005B2DB6 /* DiaryViewController.swift */,
 				5314FDCD2AA9292300030571 /* EditViewController.swift */,
+				530A725F2AB5DB8D009D2B67 /* HelpListViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -243,9 +255,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531725AA2AB65F66007978FA /* HelpTableViewCell.xib in Resources */,
 				5336AA812A9AD4A00072585A /* Calendar.storyboard in Resources */,
 				5336AA7F2A9AD4520072585A /* ToDoList.storyboard in Resources */,
 				533662612AA35320005B2DB6 /* Diary.storyboard in Resources */,
+				530A725C2AB5DA41009D2B67 /* HelpList.storyboard in Resources */,
 				533B76BE2A90A17400CDF8A5 /* LaunchScreen.storyboard in Resources */,
 				533B76BB2A90A17400CDF8A5 /* Assets.xcassets in Resources */,
 				5336AA832A9AD4C30072585A /* ToDo.storyboard in Resources */,
@@ -317,6 +331,8 @@
 				535DB09D2A9CC52900DEACAB /* Reward.swift in Sources */,
 				5336AA8B2A9AEB680072585A /* RewardViewController.swift in Sources */,
 				532A71612A9A342A00708CBE /* ToDoListTableViewCell.swift in Sources */,
+				530A72602AB5DB8D009D2B67 /* HelpListViewController.swift in Sources */,
+				531725A92AB65F66007978FA /* HelpTableViewCell.swift in Sources */,
 				533B76B22A90A17400CDF8A5 /* AppDelegate.swift in Sources */,
 				532A71642A9A5B2C00708CBE /* Item.swift in Sources */,
 				533B76B42A90A17400CDF8A5 /* SceneDelegate.swift in Sources */,

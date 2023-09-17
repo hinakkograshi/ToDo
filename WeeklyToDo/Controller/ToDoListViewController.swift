@@ -10,6 +10,8 @@ import XLPagerTabStrip
 
 class ToDoListViewController: ButtonBarPagerTabStripViewController {
 
+    @IBOutlet weak var supportButton: UIBarButtonItem!
+
     override func viewDidLoad() {
         // 画面UIについての処理
         setupUI()
@@ -60,4 +62,20 @@ class ToDoListViewController: ButtonBarPagerTabStripViewController {
         let childViewControllers:[UIViewController] = [firstVC, secondVC]
         return childViewControllers
     }
+
+    @IBAction func supportButtonPressed(_ sender: UIBarButtonItem) {
+        let helpVC = UIStoryboard(name: "HelpList", bundle: nil).instantiateViewController(withIdentifier: "HelpList") as! HelpListViewController
+        //🟩TabBar隠す
+        helpVC.hidesBottomBarWhenPushed = true
+        // 次の画面のBackボタンを「戻る」に変更
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
+        navigationController?.pushViewController(helpVC, animated: true)
+
+//        let navigationController = UINavigationController(rootViewController: helpVC)
+//        //🟥フルスクリーンにしないと閉じたことを認識されない
+//        navigationController.modalPresentationStyle = .fullScreen
+//        present(navigationController, animated: true)
+
+    }
+
 }

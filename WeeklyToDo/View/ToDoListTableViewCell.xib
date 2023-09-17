@@ -44,7 +44,7 @@
                 <outlet property="checkImageView" destination="1WY-XQ-4Of" id="wAJ-ic-E4P"/>
                 <outlet property="toDoTextField" destination="PC4-t8-YJb" id="w6c-C7-gx5"/>
             </connections>
-            <point key="canvasLocation" x="-710" y="49"/>
+            <point key="canvasLocation" x="-711.45038167938924" y="48.591549295774648"/>
         </tableViewCell>
     </objects>
 </document>
