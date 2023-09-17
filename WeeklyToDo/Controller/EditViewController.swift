@@ -45,4 +45,9 @@ class EditViewController: UIViewController {
         realmCRUDModel.updateRealm(updateTitle: titleText.text  ?? "", updateContent: contentText.text ?? "", updateDate: day, updateDateCreated: selectedDateCreated)
         self.dismiss(animated: true,completion: nil)
     }
+    
+    static func make() -> EditViewController {
+        let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
+        return editVC;
+    }
 }

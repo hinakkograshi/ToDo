@@ -66,7 +66,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     //🍊
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
+        let editVC = EditViewController.make()
         editVC.day = calendarDay
         editVC.selectedDiaryTitle = realmCRUDModel.readRealmArray[indexPath.row].title
         editVC.selectedDiaryContent = realmCRUDModel.readRealmArray[indexPath.row].content
