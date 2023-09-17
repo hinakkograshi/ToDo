@@ -14,7 +14,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
 
     let realmCRUDModel = RealmCRUDModel()
-    var day = ""
+    private var day = ""
     private var selectedDiaryTitle = ""
     private var selectedDiaryContent = ""
     private var selectedDateCreated = ""
@@ -46,11 +46,12 @@ class EditViewController: UIViewController {
         self.dismiss(animated: true,completion: nil)
     }
     
-    static func make(contents: Contents) -> EditViewController {
+    static func make(contents: Contents, calendarDay: String) -> EditViewController {
         let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
         editVC.selectedDiaryTitle = contents.title
         editVC.selectedDiaryContent = contents.content
         editVC.selectedDateCreated = contents.dateCreated
+        editVC.day = calendarDay
         return editVC;
     }
 }

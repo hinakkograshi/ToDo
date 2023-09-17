@@ -67,8 +67,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     //🍊
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contents = realmCRUDModel.readRealmArray[indexPath.row]
-        let editVC = EditViewController.make(contents: contents)
-        editVC.day = calendarDay
+        let editVC = EditViewController.make(contents: contents, calendarDay: calendarDay)
 
         let navigationController = UINavigationController(rootViewController: editVC)
         //🟥フルスクリーンにしないと閉じたことを認識されない
