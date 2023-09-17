@@ -21,13 +21,10 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.calendar.calendarWeekdayView.weekdayLabels[0].text = "月"
-        self.calendar.calendarWeekdayView.weekdayLabels[1].text = "火"
-        self.calendar.calendarWeekdayView.weekdayLabels[2].text = "水"
-        self.calendar.calendarWeekdayView.weekdayLabels[3].text = "木"
-        self.calendar.calendarWeekdayView.weekdayLabels[4].text = "金"
-        self.calendar.calendarWeekdayView.weekdayLabels[5].text = "土"
-        self.calendar.calendarWeekdayView.weekdayLabels[6].text = "日"
+        let weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"]
+        for (index, label) in weekdayLabels.enumerated() {
+            self.calendar.calendarWeekdayView.weekdayLabels[index].text = label
+        }
 
         tableView.rowHeight = 150.0
         // デリゲートの設定
@@ -69,11 +66,8 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     }
     //🍊
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
-        editVC.day = calendarDay
-        editVC.selectedDiaryTitle = realmCRUDModel.readRealmArray[indexPath.row].title
-        editVC.selectedDiaryContent = realmCRUDModel.readRealmArray[indexPath.row].content
-        editVC.selectedDateCreated = realmCRUDModel.readRealmArray[indexPath.row].dateCreated
+        let contents = realmCRUDModel.readRealmArray[indexPath.row]
+        let editVC = EditViewController.make(contents: contents, calendarDay: calendarDay)
 
         let navigationController = UINavigationController(rootViewController: editVC)
         //🟥フルスクリーンにしないと閉じたことを認識されない
