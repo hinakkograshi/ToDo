@@ -17,9 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZXS-ib-uGZ">
-                                <rect key="frame" x="-29" y="103" width="422" height="749"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ZXS-ib-uGZ">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="Pwk-h0-owV"/>
@@ -29,6 +28,12 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ZXS-ib-uGZ" secondAttribute="bottom" id="4Mu-ZA-JAn"/>
+                            <constraint firstItem="ZXS-ib-uGZ" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="Kfl-fz-e3S"/>
+                            <constraint firstItem="ZXS-ib-uGZ" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="NI3-em-8Gj"/>
+                            <constraint firstItem="ZXS-ib-uGZ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="ux7-zK-TAe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="サポート" id="bUy-1q-5MB"/>
                     <connections>
