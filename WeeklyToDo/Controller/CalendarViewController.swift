@@ -24,8 +24,13 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"]
         for (index, label) in weekdayLabels.enumerated() {
             self.calendar.calendarWeekdayView.weekdayLabels[index].text = label
-            print(label)
         }
+        let dt = Date()
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "yyyy/MM/dd"
+        var today = dateformatter.string(from: dt)
+        dateLabel.text = today
+        calendarDay = today
 
 
         tableView.rowHeight = 150.0
@@ -101,11 +106,11 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
 
     @IBAction func addButonPressed(_ sender: UIButton) {
-        if calendarDay == "" {
-            let alert = UIAlertController(title: "日付が選択されてません", message: "カレンダーから日付を選択してください。", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alert, animated: true, completion: nil)
-        }
+//        if calendarDay == "" {
+//            let alert = UIAlertController(title: "日付が選択されてません", message: "カレンダーから日付を選択してください。", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default))
+//            self.present(alert, animated: true, completion: nil)
+//        }
 
         let diaryVC = UIStoryboard(name: "Diary", bundle: nil).instantiateViewController(withIdentifier: "Diary") as! DiaryViewController
         diaryVC.day = calendarDay
@@ -183,7 +188,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let m = String(format: "%02d", month)
         let d = String(format: "%02d", day)
         dateLabel.text = "\(year)/\(m)/\(d)"
-        calendarDay = dateLabel.text ?? ""
+        calendarDay = dateLabel.text!
         print("\(calendarDay)")
         realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
         tableView.reloadData()
