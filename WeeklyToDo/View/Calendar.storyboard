@@ -119,6 +119,9 @@
                     <navigationItem key="navigationItem" title="日記" id="Yel-IN-u3E">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="questionmark.circle" catalog="system" id="10v-IM-z3v">
                             <color key="tintColor" red="0.92941176469999998" green="0.94509803920000002" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="supportButtonPressed:" destination="yvk-nl-LaP" id="QZb-yZ-RHv"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -129,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMQ-bi-Jnx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1878.75" y="875.70422535211264"/>
+            <point key="canvasLocation" x="1760" y="832"/>
         </scene>
         <!--Item-->
         <scene sceneID="61x-dd-8De">

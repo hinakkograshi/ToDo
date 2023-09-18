@@ -31,8 +31,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         var today = dateformatter.string(from: dt)
         dateLabel.text = today
         calendarDay = today
-
-
         tableView.rowHeight = 150.0
         // デリゲートの設定
         self.calendar.dataSource = self
@@ -59,16 +57,12 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return realmCRUDModel.readRealmArray.count
-//        realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
-//        return realmCRUDModel.getCount()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
-//        realmCRUDModel.calendarDayRead(calendarDay: calendarDay)
         cell.titleText.text = realmCRUDModel.readRealmArray[indexPath.row].title
         cell.contentText.text = realmCRUDModel.readRealmArray[indexPath.row].content
-
         return cell
     }
     //🍊
@@ -106,12 +100,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
 
     @IBAction func addButonPressed(_ sender: UIButton) {
-//        if calendarDay == "" {
-//            let alert = UIAlertController(title: "日付が選択されてません", message: "カレンダーから日付を選択してください。", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-
         let diaryVC = UIStoryboard(name: "Diary", bundle: nil).instantiateViewController(withIdentifier: "Diary") as! DiaryViewController
         diaryVC.day = calendarDay
         let navigationController = UINavigationController(rootViewController: diaryVC)
@@ -207,5 +195,14 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         } else {
             return nil
         }
+    }
+
+    @IBAction func supportButtonPressed(_ sender: UIBarButtonItem) {
+        let helpVC = UIStoryboard(name: "HelpList", bundle: nil).instantiateViewController(withIdentifier: "HelpList") as! HelpListViewController
+        //🟩TabBar隠す
+        helpVC.hidesBottomBarWhenPushed = true
+        // 次の画面のBackボタンを「戻る」に変更
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
+        navigationController?.pushViewController(helpVC, animated: true)
     }
 }

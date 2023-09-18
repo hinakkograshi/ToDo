@@ -16,6 +16,7 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "HelpTableViewCell", bundle: nil), forCellReuseIdentifier: "HelpListCell")
+        tableView.rowHeight = 60
 
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,12 +29,15 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let explanation = supportContents[0] {
-//
-//        } else if item = supportContents[1] {
-//
-//        }
-        //選択されてグレーになり、すぐに白に戻す
+        switch indexPath.row {
+        case 0: guard let url = URL(string: "https://hiyokkograshi.com/%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/#toc2") else { return }
+            UIApplication.shared.open(url)
+        case 1: guard let url = URL(string: "https://itunes.apple.com/app/id6464771684?action=write-review") else { return }
+            UIApplication.shared.open(url)
+        default:
+            print("error")
+        }
+//        選択されてグレーになり、すぐに白に戻す
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

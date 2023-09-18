@@ -70,12 +70,6 @@ class ToDoListViewController: ButtonBarPagerTabStripViewController {
         // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
         navigationController?.pushViewController(helpVC, animated: true)
-
-//        let navigationController = UINavigationController(rootViewController: helpVC)
-//        //🟥フルスクリーンにしないと閉じたことを認識されない
-//        navigationController.modalPresentationStyle = .fullScreen
-//        present(navigationController, animated: true)
-
     }
 
 }
