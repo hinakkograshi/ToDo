@@ -31,6 +31,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 60.0
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         setDismissKeyboard()
         //自動でレビュー画面表示
