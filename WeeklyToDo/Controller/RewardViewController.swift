@@ -23,11 +23,11 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
         tableView.dropDelegate = self
+        tableView.rowHeight = 60.0
         //並べ替えデータ取得
         RewardList = realm.objects(Reward.self).sorted(byKeyPath: "order")
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 60.0
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         setDismissKeyboard()
         //🟥忘れるな

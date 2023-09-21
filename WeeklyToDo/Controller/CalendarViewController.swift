@@ -9,11 +9,13 @@ import UIKit
 import FSCalendar
 import CalculateCalendarLogic
 
-class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance{
+class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UIScrollViewDelegate, FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance{
 
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var calendar: FSCalendar!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var backView: UIView!
 
     @IBOutlet weak var dateLabel: UILabel!
     var calendarDay : String = ""
@@ -21,6 +23,9 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.delegate = self
+        scrollView.contentSize = backView.frame.size
+        scrollView.flashScrollIndicators()
         let weekdayLabels = ["月", "火", "水", "木", "金", "土", "日"]
         for (index, label) in weekdayLabels.enumerated() {
             self.calendar.calendarWeekdayView.weekdayLabels[index].text = label

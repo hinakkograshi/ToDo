@@ -26,6 +26,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dragInteractionEnabled = true
         tableView.dragDelegate = self
         tableView.dropDelegate = self
+        tableView.rowHeight = 60.0
         //並べ替えデータ取得
         toDoItems = realm.objects(Item.self).sorted(byKeyPath: "order")
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
