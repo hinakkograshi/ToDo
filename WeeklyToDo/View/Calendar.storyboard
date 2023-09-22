@@ -28,6 +28,8 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="Q8M-sM-Hhx"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="690" id="WXW-0B-EeV"/>
+                                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="353" id="tDI-oG-yU4"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="weekdayTextColor">

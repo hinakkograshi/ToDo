@@ -18,11 +18,14 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var backView: UIView!
 
     @IBOutlet weak var dateLabel: UILabel!
+
+    @IBOutlet weak var calendarContainer: UIView!
     var calendarDay : String = ""
     let realmCRUDModel = RealmCRUDModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         scrollView.delegate = self
         scrollView.contentSize = backView.frame.size
         scrollView.flashScrollIndicators()
@@ -33,7 +36,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let dt = Date()
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy/MM/dd"
-        var today = dateformatter.string(from: dt)
+        let today = dateformatter.string(from: dt)
         dateLabel.text = today
         calendarDay = today
         tableView.rowHeight = 150.0
@@ -56,6 +59,12 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
         calendar.reloadData()
         tableView.reloadData()
+    }
+    //カレンダーの回転
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        calendar.setNeedsLayout()
+        calendar.layoutIfNeeded()
     }
 
 
