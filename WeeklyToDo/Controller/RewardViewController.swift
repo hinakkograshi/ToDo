@@ -15,6 +15,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var emptyView: UIView!
     let realm = try! Realm()
     var RewardList: Results<Reward>!
 
@@ -45,6 +46,12 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if RewardList.count == 0 {
+            emptyView.isHidden = false
+        }
+        else {
+            emptyView.isHidden = true
+        }
         return RewardList.count
     }
 

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jvp-vj-hJ4">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -24,6 +25,21 @@
                                     <outlet property="delegate" destination="Jvp-vj-hJ4" id="oaA-UI-ype"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Aa-gQ-vmN">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rewardList" translatesAutoresizingMaskIntoConstraints="NO" id="qFL-3K-tFa">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qFL-3K-tFa" secondAttribute="bottom" id="3po-Ix-xao"/>
+                                    <constraint firstAttribute="trailing" secondItem="qFL-3K-tFa" secondAttribute="trailing" id="RcY-Gx-0cx"/>
+                                    <constraint firstItem="qFL-3K-tFa" firstAttribute="leading" secondItem="8Aa-gQ-vmN" secondAttribute="leading" id="UfX-k0-NZi"/>
+                                    <constraint firstItem="qFL-3K-tFa" firstAttribute="top" secondItem="8Aa-gQ-vmN" secondAttribute="top" id="sma-NP-k3v"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rrh-eg-kAX">
                                 <rect key="frame" x="308" y="733" width="70" height="70"/>
                                 <constraints>
@@ -41,15 +57,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="x9P-Ks-I2x" firstAttribute="bottom" secondItem="rrh-eg-kAX" secondAttribute="bottom" constant="15" id="1l0-Pl-41Y"/>
+                            <constraint firstItem="x9P-Ks-I2x" firstAttribute="bottom" secondItem="8Aa-gQ-vmN" secondAttribute="bottom" id="3h0-cb-Bbc"/>
                             <constraint firstItem="FY4-1z-FEg" firstAttribute="leading" secondItem="x9P-Ks-I2x" secondAttribute="leading" id="AmS-9F-r0h"/>
                             <constraint firstItem="FY4-1z-FEg" firstAttribute="trailing" secondItem="x9P-Ks-I2x" secondAttribute="trailing" id="Ehc-kR-nI1"/>
                             <constraint firstItem="FY4-1z-FEg" firstAttribute="top" secondItem="x9P-Ks-I2x" secondAttribute="top" id="MRD-CK-ByM"/>
                             <constraint firstItem="x9P-Ks-I2x" firstAttribute="bottom" secondItem="FY4-1z-FEg" secondAttribute="bottom" id="V0C-38-xo8"/>
+                            <constraint firstItem="8Aa-gQ-vmN" firstAttribute="leading" secondItem="x9P-Ks-I2x" secondAttribute="leading" id="YiG-uy-RuR"/>
+                            <constraint firstItem="x9P-Ks-I2x" firstAttribute="trailing" secondItem="8Aa-gQ-vmN" secondAttribute="trailing" id="fBh-gO-U3Z"/>
                             <constraint firstItem="x9P-Ks-I2x" firstAttribute="trailing" secondItem="rrh-eg-kAX" secondAttribute="trailing" constant="15" id="fJL-WU-mKa"/>
+                            <constraint firstItem="8Aa-gQ-vmN" firstAttribute="top" secondItem="x9P-Ks-I2x" secondAttribute="top" id="mjS-Ns-veb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="W8u-Ev-Fii"/>
                     <connections>
+                        <outlet property="emptyView" destination="8Aa-gQ-vmN" id="TAU-OY-dBL"/>
                         <outlet property="tableView" destination="FY4-1z-FEg" id="AH0-W0-1XX"/>
                     </connections>
                 </viewController>
@@ -60,6 +81,7 @@
     </scenes>
     <resources>
         <image name="addButton" width="70" height="70.333335876464844"/>
+        <image name="rewardList" width="150" height="150"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

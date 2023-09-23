@@ -18,6 +18,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var emptyView: UIView!
     let realm = try! Realm()
     var toDoItems: Results<Item>!
     
@@ -35,13 +36,15 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = 60.0
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         setDismissKeyboard()
-        //自動でレビュー画面表示
+        //ToDoリストが3以上ならレビュー画面表示
+        guard toDoItems.count >= 3 else { return }
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             SKStoreReviewController.requestReview(in: scene)
         }
         //🟥忘れるな
         tableView.reloadData()
     }
+
     //デリゲートメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //キーボードを閉じる。
@@ -54,11 +57,13 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if toDoItems.count == 0 {
+            emptyView.isHidden = false
+        }
+        else {
+            emptyView.isHidden = true
+        }
         return toDoItems.count
-    }
-    //ToDoリストが3以上ならレビュー画面表示
-    private func requestAppStoreReview() {
-        guard toDoItems.count >= 3 else { return }
     }
     
     //🟥customCell

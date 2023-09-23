@@ -25,6 +25,21 @@
                                     <outlet property="delegate" destination="FsA-A7-d49" id="qRk-sg-apq"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBB-Og-YYd">
+                                <rect key="frame" x="0.0" y="50" width="375" height="728"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="todoList" translatesAutoresizingMaskIntoConstraints="NO" id="zLG-vl-PqN">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="728"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="zLG-vl-PqN" firstAttribute="leading" secondItem="DBB-Og-YYd" secondAttribute="leading" id="8tk-Dz-PEM"/>
+                                    <constraint firstAttribute="bottom" secondItem="zLG-vl-PqN" secondAttribute="bottom" id="IW5-kL-bxZ"/>
+                                    <constraint firstItem="zLG-vl-PqN" firstAttribute="top" secondItem="DBB-Og-YYd" secondAttribute="top" id="N8s-mM-SRb"/>
+                                    <constraint firstAttribute="trailing" secondItem="zLG-vl-PqN" secondAttribute="trailing" id="mIS-18-4Rw"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GF9-Dv-ld9">
                                 <rect key="frame" x="290" y="693" width="70" height="70"/>
                                 <constraints>
@@ -41,26 +56,32 @@
                         <viewLayoutGuide key="safeArea" id="jn4-dg-nR7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="DBB-Og-YYd" firstAttribute="top" secondItem="jn4-dg-nR7" secondAttribute="top" id="4Vo-gf-IQT"/>
                             <constraint firstItem="mPN-w4-2gt" firstAttribute="top" secondItem="jn4-dg-nR7" secondAttribute="top" id="85Z-Pd-Ffg"/>
                             <constraint firstItem="jn4-dg-nR7" firstAttribute="bottom" secondItem="mPN-w4-2gt" secondAttribute="bottom" id="C09-Wx-VpT"/>
                             <constraint firstItem="jn4-dg-nR7" firstAttribute="bottom" secondItem="GF9-Dv-ld9" secondAttribute="bottom" constant="15" id="MUJ-cX-YOd"/>
+                            <constraint firstItem="DBB-Og-YYd" firstAttribute="leading" secondItem="jn4-dg-nR7" secondAttribute="leading" id="ROQ-qU-h9s"/>
                             <constraint firstItem="jn4-dg-nR7" firstAttribute="trailing" secondItem="GF9-Dv-ld9" secondAttribute="trailing" constant="15" id="Tnv-5r-eVL"/>
+                            <constraint firstItem="jn4-dg-nR7" firstAttribute="trailing" secondItem="DBB-Og-YYd" secondAttribute="trailing" id="WD6-pF-JWe"/>
                             <constraint firstItem="mPN-w4-2gt" firstAttribute="trailing" secondItem="jn4-dg-nR7" secondAttribute="trailing" id="Z4w-6a-e8C"/>
+                            <constraint firstItem="jn4-dg-nR7" firstAttribute="bottom" secondItem="DBB-Og-YYd" secondAttribute="bottom" id="e6O-Oz-AJj"/>
                             <constraint firstItem="mPN-w4-2gt" firstAttribute="leading" secondItem="jn4-dg-nR7" secondAttribute="leading" id="gI2-ld-Jtj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AzJ-pu-Urf"/>
                     <connections>
+                        <outlet property="emptyView" destination="DBB-Og-YYd" id="4yB-BK-btf"/>
                         <outlet property="tableView" destination="mPN-w4-2gt" id="hbI-gd-HYq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LrN-u2-edZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3388.5496183206105" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="3388" y="2.9556650246305418"/>
         </scene>
     </scenes>
     <resources>
         <image name="addButton" width="70" height="70.333335876464844"/>
+        <image name="todoList" width="150" height="150"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
