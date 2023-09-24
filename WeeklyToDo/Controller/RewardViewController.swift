@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 import XLPagerTabStrip
 
 class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate, ChangeDelegate {
@@ -16,8 +15,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var emptyView: UIView!
-    let realm = try! Realm()
-    var RewardList: Results<Reward>!
+    let rewardRealmModel = RewardRealmModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +24,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dropDelegate = self
         tableView.rowHeight = 60.0
         //並べ替えデータ取得
-        RewardList = realm.objects(Reward.self).sorted(byKeyPath: "order")
+        rewardRealmModel.sortRead()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
@@ -46,13 +44,13 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if RewardList.count == 0 {
+        if rewardRealmModel.rewardList.count == 0 {
             emptyView.isHidden = false
         }
         else {
             emptyView.isHidden = true
         }
-        return RewardList.count
+        return rewardRealmModel.rewardList.count
     }
 
     //🟨チェックボックスの色の変更
@@ -60,7 +58,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ToDoListTableViewCell
         //自作のセルのデリゲート先に自分を設定する
         cell.delegate = self
-        if let Reward = RewardList?[indexPath.row] {
+        if let Reward = rewardRealmModel.rewardList?[indexPath.row] {
             cell.toDoTextField?.text = Reward.title
             cell.checkImageView.image = Reward.done ? UIImage(named: "present") : UIImage(named: "rewardBox")
         } else {
@@ -73,12 +71,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func textFieldDidEndEditing(cell: ToDoListTableViewCell, value: String) {
         //変更されたセルのインデックスを取得する。
         let index = tableView.indexPathForRow(at: cell.convert(cell.bounds.origin, to:tableView))
-        print(index!)
-        try! realm.write {
-            //データを変更する。
-            RewardList[index!.row].title = value
-        }
-
+        rewardRealmModel.updateRealm(index: index!.row, value: value)
         self.tableView.reloadData()
     }
     //MARK - TableView Delegate Methods
@@ -86,18 +79,8 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //        Updateする場所はdidSelectRowAt.Updateは新規作成と似てる
-        if let Reward = RewardList?[indexPath.row] {
-            do {
-                //Updateitemの更新されたプロパティを以前は何であったかを問わず、トグルして書き込む
-                try realm.write {
-                    Reward.done = !Reward.done
-                }
-            } catch {
-                print("Error saving done status.")
-            }
-        }
+        rewardRealmModel.checkUpdateRealm(index: indexPath.row)
         tableView.reloadData()
-
         //選択されてグレーになり、すぐに白に戻す
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -105,30 +88,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     //ユーザーが並び替えを行うと、UITableViewはUIを更新します
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
-        try! realm.write {
-            let sourceObject = RewardList[sourceIndexPath.row]
-            print("最初の行",sourceObject.order)
-            let destinationObject = RewardList[destinationIndexPath.row]
-
-            let destinationObjectOrder = destinationObject.order
-
-            if sourceIndexPath.row < destinationIndexPath.row {
-
-                for index in sourceIndexPath.row...destinationIndexPath.row {
-                    let object = RewardList[index]
-                    object.order -= 1
-
-                }
-            } else {
-                for index in (destinationIndexPath.row..<sourceIndexPath.row).reversed() {
-                    let object = RewardList[index]
-                    object.order += 1
-                }
-            }
-            sourceObject.order = destinationObjectOrder
-            print("最後の行",sourceObject.order)
-        }
+        rewardRealmModel.sortCellUpdate(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
 
 
@@ -146,17 +106,8 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if let itemForDeletion = self.RewardList?[indexPath.row] {
-                do {
-                    //セルを削除してRealmデータベースに存在しないようにする
-                    try self.realm.write {
-                        self.realm.delete(itemForDeletion)
-                    }
-                } catch {
-                    print("Error deleting category,\(error)")
-                }
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
+            rewardRealmModel.deleteRealm(index: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 
@@ -165,16 +116,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var textField = UITextField()
         let alert = UIAlertController(title: "ごほうびの追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "追加", style: .default) { action in
-
-            let newItem = Reward()
-            newItem.title = textField.text!
-            if let lastItem = self.RewardList.last {
-                newItem.order = lastItem.order + 1
-            }
-            try! self.realm.write {
-                self.realm.add(newItem)
-            }
-
+            self.rewardRealmModel.createRealm(rewardText: textField.text!)
             self.tableView.reloadData()
         }
 

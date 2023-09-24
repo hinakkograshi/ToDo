@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-class RealmCRUDModel {
+class CalendarRealmModel {
     let realm = try! Realm()
     let diaryModel = DiaryModel()
     var readRealmArray:[Contents] = []
     var diaryModels: Results<DiaryModel>!
 }
 //Create
-extension RealmCRUDModel {
+extension CalendarRealmModel {
     func createRealm(realmTitle: String, realmContent: String, realmDate: String, realmDateCreated: String) {
 
         diaryModel.title = realmTitle
@@ -30,20 +30,20 @@ extension RealmCRUDModel {
 }
 
 //Read
-extension RealmCRUDModel {
+extension CalendarRealmModel {
     func calendarDayRead(calendarDay:String) -> Results<DiaryModel> {
         let result = realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay))
         return result
     }
 }
-extension RealmCRUDModel {
+extension CalendarRealmModel {
     func eventRead(calendarEvent:String) -> Results<DiaryModel> {
         let event = realm.objects(DiaryModel.self).where({$0.date == calendarEvent})
         return event
     }
 }
 
-extension RealmCRUDModel {
+extension CalendarRealmModel {
     func filterReadRealm(calendarDay:String) {
         //🟥viewDidLoad()読み込みしなくても配列を一旦初期化。押した日のcellを表示。これ重要やった！
         readRealmArray = []
@@ -61,7 +61,7 @@ extension RealmCRUDModel {
 }
 
 //Update
-extension RealmCRUDModel {
+extension CalendarRealmModel {
     func updateRealm(updateTitle: String, updateContent: String, updateDate: String, updateDateCreated: String) {
 
         try! realm.write {
@@ -75,7 +75,7 @@ extension RealmCRUDModel {
 }
 
 //Delete
-extension RealmCRUDModel {
+extension CalendarRealmModel {
     func deleteRealm(calendarDay:String, index: Int) {
         let reault = calendarDayRead(calendarDay: calendarDay)
             //セルを削除してRealmデータベースに存在しないようにする

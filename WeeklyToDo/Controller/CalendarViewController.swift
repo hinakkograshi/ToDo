@@ -21,7 +21,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var calendarContainer: UIView!
     var calendarDay : String = ""
-    let realmCRUDModel = RealmCRUDModel()
+    let calendarRealmModel = CalendarRealmModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("モーダルから戻ったよ")
-        realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
+        calendarRealmModel.filterReadRealm(calendarDay:calendarDay)
         calendar.reloadData()
         tableView.reloadData()
     }
@@ -70,18 +70,18 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return realmCRUDModel.readRealmArray.count
+        return calendarRealmModel.readRealmArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! DiaryTableViewCell
-        cell.titleText.text = realmCRUDModel.readRealmArray[indexPath.row].title
-        cell.contentText.text = realmCRUDModel.readRealmArray[indexPath.row].content
+        cell.titleText.text = calendarRealmModel.readRealmArray[indexPath.row].title
+        cell.contentText.text = calendarRealmModel.readRealmArray[indexPath.row].content
         return cell
     }
     //🍊
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contents = realmCRUDModel.readRealmArray[indexPath.row]
+        let contents = calendarRealmModel.readRealmArray[indexPath.row]
         let editVC = EditViewController.make(contents: contents, calendarDay: calendarDay)
 //        let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
 //        editVC.day = calendarDay
@@ -105,7 +105,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            realmCRUDModel.deleteRealm(calendarDay: calendarDay, index: indexPath.row)
+            calendarRealmModel.deleteRealm(calendarDay: calendarDay, index: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             calendar.reloadData()
             tableView.reloadData()
@@ -192,7 +192,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         dateLabel.text = "\(year)/\(m)/\(d)"
         calendarDay = dateLabel.text!
         print("\(calendarDay)")
-        realmCRUDModel.filterReadRealm(calendarDay:calendarDay)
+        calendarRealmModel.filterReadRealm(calendarDay:calendarDay)
         tableView.reloadData()
     }
 
@@ -203,7 +203,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
         let calendarEvent = formatter.string(from: date)
         //🟥Modelにどう持たせるか？
-        let hasEvent = !realmCRUDModel.eventRead(calendarEvent: calendarEvent).isEmpty
+        let hasEvent = !calendarRealmModel.eventRead(calendarEvent: calendarEvent).isEmpty
         if hasEvent == true {
             return UIImage(named: "calendar")
         } else {

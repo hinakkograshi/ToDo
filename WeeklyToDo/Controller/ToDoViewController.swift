@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 import XLPagerTabStrip
 import StoreKit
 
@@ -17,10 +16,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     var itemInfo: IndicatorInfo = "やること"
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var emptyView: UIView!
-    let realm = try! Realm()
-    var toDoItems: Results<Item>!
+    let toDoRealmModel = ToDoRealmModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +26,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dropDelegate = self
         tableView.rowHeight = 60.0
         //並べ替えデータ取得
-        toDoItems = realm.objects(Item.self).sorted(byKeyPath: "order")
+        toDoRealmModel.sortRead()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
         tableView.dataSource = self
@@ -37,7 +34,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.register(UINib(nibName: "ToDoListTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         setDismissKeyboard()
         //ToDoリストが3以上ならレビュー画面表示
-        guard toDoItems.count >= 3 else { return }
+        guard toDoRealmModel.toDoItems.count >= 3 else { return }
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             SKStoreReviewController.requestReview(in: scene)
         }
@@ -57,13 +54,13 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if toDoItems.count == 0 {
+        if toDoRealmModel.toDoItems.count == 0 {
             emptyView.isHidden = false
         }
         else {
             emptyView.isHidden = true
         }
-        return toDoItems.count
+        return toDoRealmModel.toDoItems.count
     }
     
     //🟥customCell
@@ -73,7 +70,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.delegate = self
         
         cell.checkImageView.image = UIImage(systemName: "square")
-        if let item = toDoItems?[indexPath.row] {
+        if let item = toDoRealmModel.toDoItems?[indexPath.row] {
             cell.toDoTextField?.text = item.title
             cell.checkImageView.image = item.done ? UIImage(named: "check") : UIImage(named: "box")
         } else {
@@ -86,11 +83,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func textFieldDidEndEditing(cell: ToDoListTableViewCell, value: String) {
         //変更されたセルのインデックスを取得する。
         let index = tableView.indexPathForRow(at: cell.convert(cell.bounds.origin, to:tableView))
-        print(index!)
-        try! realm.write {
-            //データを変更する。
-            toDoItems[index!.row].title = value
-        }
+        toDoRealmModel.updateRealm(index: index!.row, value: value)
         
         self.tableView.reloadData()
     }
@@ -99,16 +92,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //        Updateする場所はdidSelectRowAt.Updateは新規作成と似てる
-        if let item = toDoItems?[indexPath.row] {
-            do {
-                //Updateitemの更新されたプロパティを以前は何であったかを問わず、トグルして書き込む
-                try realm.write {
-                    item.done = !item.done
-                }
-            } catch {
-                print("Error saving done status.")
-            }
-        }
+        toDoRealmModel.checkUpdateRealm(index: indexPath.row)
         tableView.reloadData()
         
         //選択されてグレーになり、すぐに白に戻す
@@ -117,30 +101,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //ユーザーが並び替えを行うと、UITableViewはUIを更新します
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        try! realm.write {
-            let sourceObject = toDoItems[sourceIndexPath.row]
-            print("最初の行",sourceObject.order)
-            let destinationObject = toDoItems[destinationIndexPath.row]
-            
-            let destinationObjectOrder = destinationObject.order
-            
-            if sourceIndexPath.row < destinationIndexPath.row {
-                
-                for index in sourceIndexPath.row...destinationIndexPath.row {
-                    let object = toDoItems[index]
-                    object.order -= 1
-                    
-                }
-            } else {
-                for index in (destinationIndexPath.row..<sourceIndexPath.row).reversed() {
-                    let object = toDoItems[index]
-                    object.order += 1
-                }
-            }
-            sourceObject.order = destinationObjectOrder
-            print("最後の行",sourceObject.order)
-        }
+        toDoRealmModel.sortCellUpdate(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
     
     
@@ -158,19 +119,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if let itemForDeletion = self.toDoItems?[indexPath.row] {
-                do {
-                    //セルを削除してRealmデータベースに存在しないようにする
-                    try self.realm.write {
-                        self.realm.delete(itemForDeletion)
-                    }
-                } catch {
-                    print("Error deleting category,\(error)")
-                }
+            toDoRealmModel.deleteRealm(index: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
         }
-    }
     
     
     
@@ -178,16 +130,7 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         var textField = UITextField()
         let alert = UIAlertController(title: "タスクの追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "追加", style: .default) { action in
-            
-            let newItem = Item()
-            newItem.title = textField.text!
-            if let lastItem = self.toDoItems.last {
-                newItem.order = lastItem.order + 1
-            }
-            try! self.realm.write {
-                self.realm.add(newItem)
-            }
-            
+            self.toDoRealmModel.createRealm(toDoText: textField.text!)
             self.tableView.reloadData()
         }
         

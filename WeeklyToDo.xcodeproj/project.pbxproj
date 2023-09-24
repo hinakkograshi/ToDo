@@ -33,10 +33,12 @@
 		533B76BB2A90A17400CDF8A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 533B76BA2A90A17400CDF8A5 /* Assets.xcassets */; };
 		533B76BE2A90A17400CDF8A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 533B76BC2A90A17400CDF8A5 /* LaunchScreen.storyboard */; };
 		533B76C72A90F17000CDF8A5 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B76C62A90F17000CDF8A5 /* CalendarViewController.swift */; };
-		534CB8772AAD480E00987CF3 /* RealmCRUDModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CB8762AAD480E00987CF3 /* RealmCRUDModel.swift */; };
+		534CB8772AAD480E00987CF3 /* CalendarRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534CB8762AAD480E00987CF3 /* CalendarRealmModel.swift */; };
 		5356D60D2AA393180049EFB4 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5356D60B2AA393180049EFB4 /* DiaryTableViewCell.swift */; };
 		5356D60E2AA393180049EFB4 /* DiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5356D60C2AA393180049EFB4 /* DiaryTableViewCell.xib */; };
 		535DB09D2A9CC52900DEACAB /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DB09C2A9CC52900DEACAB /* Reward.swift */; };
+		53B742892ABFB1B700814507 /* RewardRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B742882ABFB1B700814507 /* RewardRealmModel.swift */; };
+		53DE586F2ABF22D90066BDFE /* ToDoRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE586E2ABF22D90066BDFE /* ToDoRealmModel.swift */; };
 		AC14BD069AA203C5360DC926 /* Pods_WeeklyToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F50F7B10FAB5FD98DE2C38D /* Pods_WeeklyToDo.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,10 +72,12 @@
 		533B76BD2A90A17400CDF8A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		533B76BF2A90A17400CDF8A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		533B76C62A90F17000CDF8A5 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		534CB8762AAD480E00987CF3 /* RealmCRUDModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCRUDModel.swift; sourceTree = "<group>"; };
+		534CB8762AAD480E00987CF3 /* CalendarRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRealmModel.swift; sourceTree = "<group>"; };
 		5356D60B2AA393180049EFB4 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		5356D60C2AA393180049EFB4 /* DiaryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiaryTableViewCell.xib; sourceTree = "<group>"; };
 		535DB09C2A9CC52900DEACAB /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
+		53B742882ABFB1B700814507 /* RewardRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardRealmModel.swift; sourceTree = "<group>"; };
+		53DE586E2ABF22D90066BDFE /* ToDoRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoRealmModel.swift; sourceTree = "<group>"; };
 		8F50F7B10FAB5FD98DE2C38D /* Pods_WeeklyToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeeklyToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80CB0BBB3C27A44335989FA /* Pods-WeeklyToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeeklyToDo.debug.xcconfig"; path = "Target Support Files/Pods-WeeklyToDo/Pods-WeeklyToDo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +100,9 @@
 				532A71632A9A5B2C00708CBE /* Item.swift */,
 				535DB09C2A9CC52900DEACAB /* Reward.swift */,
 				533662662AA37015005B2DB6 /* DiaryModel.swift */,
-				534CB8762AAD480E00987CF3 /* RealmCRUDModel.swift */,
+				534CB8762AAD480E00987CF3 /* CalendarRealmModel.swift */,
+				53DE586E2ABF22D90066BDFE /* ToDoRealmModel.swift */,
+				53B742882ABFB1B700814507 /* RewardRealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,8 +329,10 @@
 				5336AA872A9AEA760072585A /* ToDoListViewController.swift in Sources */,
 				5356D60D2AA393180049EFB4 /* DiaryTableViewCell.swift in Sources */,
 				533662672AA37015005B2DB6 /* DiaryModel.swift in Sources */,
+				53DE586F2ABF22D90066BDFE /* ToDoRealmModel.swift in Sources */,
 				533B76C72A90F17000CDF8A5 /* CalendarViewController.swift in Sources */,
 				533B76B62A90A17400CDF8A5 /* ToDoViewController.swift in Sources */,
+				53B742892ABFB1B700814507 /* RewardRealmModel.swift in Sources */,
 				533662632AA3549F005B2DB6 /* DiaryViewController.swift in Sources */,
 				5314FDCE2AA9292300030571 /* EditViewController.swift in Sources */,
 				5336AA7D2A9AD4270072585A /* MainTabBarController.swift in Sources */,
@@ -336,7 +344,7 @@
 				533B76B22A90A17400CDF8A5 /* AppDelegate.swift in Sources */,
 				532A71642A9A5B2C00708CBE /* Item.swift in Sources */,
 				533B76B42A90A17400CDF8A5 /* SceneDelegate.swift in Sources */,
-				534CB8772AAD480E00987CF3 /* RealmCRUDModel.swift in Sources */,
+				534CB8772AAD480E00987CF3 /* CalendarRealmModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

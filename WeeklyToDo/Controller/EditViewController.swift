@@ -13,7 +13,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var contentText: UITextView!
     @IBOutlet weak var dateLabel: UILabel!
 
-    let realmCRUDModel = RealmCRUDModel()
+    let calendarRealmModel = CalendarRealmModel()
     private var day = ""
     private var selectedDiaryTitle = ""
     private var selectedDiaryContent = ""
@@ -42,7 +42,7 @@ class EditViewController: UIViewController {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     @IBAction func editButton(_ sender: Any) {
-        realmCRUDModel.updateRealm(updateTitle: titleText.text  ?? "", updateContent: contentText.text ?? "", updateDate: day, updateDateCreated: selectedDateCreated)
+        calendarRealmModel.updateRealm(updateTitle: titleText.text  ?? "", updateContent: contentText.text ?? "", updateDate: day, updateDateCreated: selectedDateCreated)
         self.dismiss(animated: true,completion: nil)
     }
     static func make(contents: Contents, calendarDay: String) -> EditViewController {

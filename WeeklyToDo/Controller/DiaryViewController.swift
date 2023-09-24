@@ -15,7 +15,7 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
 
 
-    let realmCRUDModel = RealmCRUDModel()
+    let calendarRealmModel = CalendarRealmModel()
     var day = ""
 
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class DiaryViewController: UIViewController {
 
     //保存ボタンを押した際に保存
     @IBAction func diarySave(_ sender: UIBarButtonItem) {
-        realmCRUDModel.createRealm(realmTitle: titleText.text  ?? "", realmContent: contentText.text ?? "", realmDate: dateLabel.text ?? "", realmDateCreated: Date().description)
+        calendarRealmModel.createRealm(realmTitle: titleText.text  ?? "", realmContent: contentText.text ?? "", realmDate: dateLabel.text ?? "", realmDateCreated: Date().description)
         self.dismiss(animated: true,completion: nil)
     }
 }
