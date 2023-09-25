@@ -14,10 +14,18 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
     private let supportContents = [
         HelpItem(
             label: "操作説明",
-            url: URL(string: "https://hiyokkograshi.com/%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/#toc2")!),
+            action: {
+                let url = URL(string: "https://hiyokkograshi.com/%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/#toc2")!
+                UIApplication.shared.open(url)
+            }
+        ),
         HelpItem(
             label: "開発者を応援する📣",
-            url: URL(string: "https://itunes.apple.com/app/id6464771684?action=write-review")!),
+            action: {
+                let url = URL(string: "https://itunes.apple.com/app/id6464771684?action=write-review")!
+                UIApplication.shared.open(url)
+            }
+        ),
     ]
     
     override func viewDidLoad() {
@@ -36,8 +44,7 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let url = self.supportContents[indexPath.row].url
-        UIApplication.shared.open(url)
+        self.supportContents[indexPath.row].action()
 //        選択されてグレーになり、すぐに白に戻す
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -45,5 +52,5 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
 
 private struct HelpItem {
     let label: String
-    let url: URL
+    let action: () -> Void
 }
