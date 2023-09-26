@@ -16,16 +16,13 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var backView: UIView!
-
     @IBOutlet weak var dateLabel: UILabel!
-
     @IBOutlet weak var calendarContainer: UIView!
     var calendarDay : String = ""
     let calendarRealmModel = CalendarRealmModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         scrollView.delegate = self
         scrollView.contentSize = backView.frame.size
         scrollView.flashScrollIndicators()
@@ -47,9 +44,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         tableView.register(UINib(nibName: "DiaryTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        // MARK: id をキーとしてソートする
-//        realmCRUDModel.sortedRead()
-        //        diaryModels = realm.objects(DiaryModel.self).sorted(byKeyPath: "dateCreated")
         tableView.reloadData()
     }
 
@@ -69,7 +63,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return calendarRealmModel.readRealmArray.count
     }
 
@@ -83,12 +76,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contents = calendarRealmModel.readRealmArray[indexPath.row]
         let editVC = EditViewController.make(contents: contents, calendarDay: calendarDay)
-//        let editVC = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "Edit") as! EditViewController
-//        editVC.day = calendarDay
-//        editVC.selectedDiaryTitle = realmCRUDModel.readRealmArray[indexPath.row].title
-//        editVC.selectedDiaryContent = realmCRUDModel.readRealmArray[indexPath.row].content
-//        editVC.selectedDateCreated = realmCRUDModel.readRealmArray[indexPath.row].dateCreated
-
         let navigationController = UINavigationController(rootViewController: editVC)
         //🟥フルスクリーンにしないと閉じたことを認識されない
         navigationController.modalPresentationStyle = .fullScreen

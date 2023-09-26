@@ -11,7 +11,24 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
     
 
     @IBOutlet weak var tableView: UITableView!
-    let supportContents = ["操作説明", "開発者を応援する📣"]
+    private let supportContents = [
+        HelpItem(
+            label: "操作説明",
+            action: {
+                let url = URL(string: "https://hiyokkograshi.com/%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/#toc2")!
+                UIApplication.shared.open(url)
+            }
+        ),
+
+        HelpItem(
+            label:"開発者を応援する📣",
+            action: {
+                let url = URL(string: "https://itunes.apple.com/app/id6464771684?action=write-review")!
+                UIApplication.shared.open(url)
+            }
+        )
+
+            ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,24 +37,22 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
 
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return supportContents.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HelpListCell", for: indexPath) as! HelpTableViewCell
-        cell.supportLabel.text = self.supportContents[indexPath.row]
+        cell.supportLabel.text = self.supportContents[indexPath.row].label
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0: guard let url = URL(string: "https://hiyokkograshi.com/%e6%93%8d%e4%bd%9c%e8%aa%ac%e6%98%8e/#toc2") else { return }
-            UIApplication.shared.open(url)
-        case 1: guard let url = URL(string: "https://itunes.apple.com/app/id6464771684?action=write-review") else { return }
-            UIApplication.shared.open(url)
-        default:
-            print("error")
-        }
+        self.supportContents[indexPath.row].action()
 //        選択されてグレーになり、すぐに白に戻す
         tableView.deselectRow(at: indexPath, animated: true)
     }
+}
+
+private struct HelpItem {
+    let label: String
+    let action: () -> Void
 }
