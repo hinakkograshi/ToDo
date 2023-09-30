@@ -33,6 +33,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let dt = Date()
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy/MM/dd"
+        dateformatter.calendar = Calendar(identifier: .gregorian)
         let today = dateformatter.string(from: dt)
         dateLabel.text = today
         calendarDay = today
