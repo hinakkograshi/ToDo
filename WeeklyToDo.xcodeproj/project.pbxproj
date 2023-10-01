@@ -24,7 +24,7 @@
 		5336AA812A9AD4A00072585A /* Calendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5336AA802A9AD4A00072585A /* Calendar.storyboard */; };
 		5336AA832A9AD4C30072585A /* ToDo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5336AA822A9AD4C20072585A /* ToDo.storyboard */; };
 		5336AA852A9AD4F70072585A /* Reward.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5336AA842A9AD4F70072585A /* Reward.storyboard */; };
-		5336AA872A9AEA760072585A /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336AA862A9AEA760072585A /* ToDoListViewController.swift */; };
+		5336AA872A9AEA760072585A /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336AA862A9AEA760072585A /* TabContainerViewController.swift */; };
 		5336AA8B2A9AEB680072585A /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5336AA8A2A9AEB680072585A /* RewardViewController.swift */; };
 		533B76B22A90A17400CDF8A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B76B12A90A17400CDF8A5 /* AppDelegate.swift */; };
 		533B76B42A90A17400CDF8A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533B76B32A90A17400CDF8A5 /* SceneDelegate.swift */; };
@@ -63,7 +63,7 @@
 		5336AA802A9AD4A00072585A /* Calendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Calendar.storyboard; sourceTree = "<group>"; };
 		5336AA822A9AD4C20072585A /* ToDo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ToDo.storyboard; sourceTree = "<group>"; };
 		5336AA842A9AD4F70072585A /* Reward.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reward.storyboard; sourceTree = "<group>"; };
-		5336AA862A9AEA760072585A /* ToDoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListViewController.swift; sourceTree = "<group>"; };
+		5336AA862A9AEA760072585A /* TabContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainerViewController.swift; sourceTree = "<group>"; };
 		5336AA8A2A9AEB680072585A /* RewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
 		533B76AE2A90A17400CDF8A5 /* WeeklyToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		533B76B12A90A17400CDF8A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				5336AA7C2A9AD4270072585A /* MainTabBarController.swift */,
-				5336AA862A9AEA760072585A /* ToDoListViewController.swift */,
+				5336AA862A9AEA760072585A /* TabContainerViewController.swift */,
 				533B76B52A90A17400CDF8A5 /* ToDoViewController.swift */,
 				5336AA8A2A9AEB680072585A /* RewardViewController.swift */,
 				533B76C62A90F17000CDF8A5 /* CalendarViewController.swift */,
@@ -329,7 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5336AA872A9AEA760072585A /* ToDoListViewController.swift in Sources */,
+				5336AA872A9AEA760072585A /* TabContainerViewController.swift in Sources */,
 				5356D60D2AA393180049EFB4 /* DiaryTableViewCell.swift in Sources */,
 				533662672AA37015005B2DB6 /* DiaryModel.swift in Sources */,
 				53DE586F2ABF22D90066BDFE /* ToDoRealmModel.swift in Sources */,

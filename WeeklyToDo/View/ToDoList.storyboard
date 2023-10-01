@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nr5-Aj-UNi">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <accessibilityOverrides dynamicTypePreference="11"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -47,7 +48,7 @@
         <!--Weekly ToDo-->
         <scene sceneID="mho-VH-Uo0">
             <objects>
-                <viewController id="etN-rb-h5h" customClass="ToDoListViewController" customModule="WeeklyToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="etN-rb-h5h" customClass="TabContainerViewController" customModule="WeeklyToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Swv-dc-qbS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,6 +90,12 @@
                                 <action selector="supportButtonPressed:" destination="etN-rb-h5h" id="wMn-Cv-TRX"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="deleteIcon" id="Jtw-MJ-ipR">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="tapDeleteButton:" destination="etN-rb-h5h" id="bVW-g5-qSH"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="SkK-io-Avw" id="GaK-Nb-Lph"/>
@@ -102,6 +109,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="deleteIcon" width="20" height="28"/>
         <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

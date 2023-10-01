@@ -1,5 +1,5 @@
 //
-//  ToDoListViewController.swift
+//  TabContainerViewController.swift
 //  WeeklyToDo
 //
 //  Created by Hina on 2023/08/27.
@@ -8,9 +8,10 @@
 import UIKit
 import XLPagerTabStrip
 
-class ToDoListViewController: ButtonBarPagerTabStripViewController {
+class TabContainerViewController: ButtonBarPagerTabStripViewController {
 
     @IBOutlet weak var supportButton: UIBarButtonItem!
+    let toDoRealmModel = ToDoRealmModel()
 
     override func viewDidLoad() {
         // 画面UIについての処理
@@ -72,4 +73,23 @@ class ToDoListViewController: ButtonBarPagerTabStripViewController {
         navigationController?.pushViewController(helpVC, animated: true)
     }
 
+    @IBAction func tapDeleteButton(_ sender: UIBarButtonItem) {
+        //checkboxにチェックが入っているもの
+        print(#function)
+
+//        self.currentIndex
+//        self.viewControllers
+        print("viewControllers", viewControllers)
+        print("currentIndex", currentIndex)
+
+        switch viewControllers[currentIndex] {
+        case let toDoViewController as ToDoViewController:
+            toDoViewController.tapDeleteButton()
+        case let rewardViewController as RewardViewController:
+            rewardViewController.tapDeleteButton()
+        default:
+//            fatalError()
+            assertionFailure("currentIndex is invalid.")
+        }
+    }
 }

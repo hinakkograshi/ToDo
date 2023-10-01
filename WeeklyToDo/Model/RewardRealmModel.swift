@@ -104,3 +104,17 @@ extension RewardRealmModel {
         }
     }
 }
+//🟥checkDelete
+extension RewardRealmModel {
+    func checkboxDelete () {
+        do {
+            let check = realm.objects(Reward.self).where({$0.done == true})
+            //セルを削除してRealmデータベースに存在しないようにする
+            try self.realm.write {
+            self.realm.delete(check)
+            }
+        } catch {
+            print("Error deleting category,\(error)")
+        }
+    }
+}

@@ -143,6 +143,21 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         alert.addAction(cancelButton)
         present(alert, animated: true, completion: nil)
     }
+
+    func tapDeleteButton() {
+        let alert = UIAlertController(title: "削除", message: "達成したタスクを削除しますか？", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "削除", style: .default) { (action) in
+            self.toDoRealmModel.checkboxDelete()
+            self.tableView.reloadData()
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(defaultAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 //キーボード閉じる
 extension UIViewController {
@@ -161,4 +176,5 @@ extension ToDoViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return itemInfo
     }
+    
 }

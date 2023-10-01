@@ -92,7 +92,6 @@ extension ToDoRealmModel {
 //🟥Delete
 extension ToDoRealmModel {
     func deleteRealm(index: Int) {
-
         if let itemForDeletion = self.toDoItems?[index] {
             do {
                 //セルを削除してRealmデータベースに存在しないようにする
@@ -102,6 +101,20 @@ extension ToDoRealmModel {
             } catch {
                 print("Error deleting category,\(error)")
             }
+        }
+    }
+}
+//🟥checkDelete
+extension ToDoRealmModel {
+    func checkboxDelete () {
+        do {
+            let check = realm.objects(Item.self).where({$0.done == true})
+            //セルを削除してRealmデータベースに存在しないようにする
+            try self.realm.write {
+            self.realm.delete(check)
+            }
+        } catch {
+            print("Error deleting category,\(error)")
         }
     }
 }

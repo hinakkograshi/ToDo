@@ -129,6 +129,21 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         alert.addAction(cancelButton)
         present(alert, animated: true, completion: nil)
     }
+
+    func tapDeleteButton() {
+        let alert = UIAlertController(title: "削除", message: "達成したごほうびを削除しますか？", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "削除", style: .default) {(action) in
+            self.rewardRealmModel.checkboxDelete()
+            self.tableView.reloadData()
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(defaultAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension RewardViewController: IndicatorInfoProvider {
