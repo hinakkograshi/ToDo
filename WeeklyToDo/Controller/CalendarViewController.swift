@@ -188,7 +188,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-
+        formatter.calendar = Calendar(identifier: .gregorian)
         let calendarEvent = formatter.string(from: date)
         //🟥Modelにどう持たせるか？
         let hasEvent = !calendarRealmModel.eventRead(calendarEvent: calendarEvent).isEmpty
@@ -196,6 +196,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
             return UIImage(named: "calendar")
         } else {
             return nil
+
         }
     }
 
