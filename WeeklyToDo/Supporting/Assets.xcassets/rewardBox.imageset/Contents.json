@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "rewardBox.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-未チェックチェックボックス-48 (2).png",
+      "filename" : "rewardBox@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "rewardBox@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -14,13 +14,11 @@ class DiaryViewController: UIViewController {
 
     @IBOutlet weak var dateLabel: UILabel!
 
-
     let calendarRealmModel = CalendarRealmModel()
     var day = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         titleText.layer.borderColor = UIColor.lightGray.cgColor
         titleText.layer.borderWidth = 0.5
         titleText.layer.cornerRadius = 5

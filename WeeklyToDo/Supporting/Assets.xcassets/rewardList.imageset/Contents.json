@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "rewardList1 1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "無題7_20230923121058.png",
+      "filename" : "rewardList1 1@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "rewardList1 1@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

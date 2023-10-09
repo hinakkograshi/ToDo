@@ -19,10 +19,8 @@ class EditViewController: UIViewController {
     private var selectedDiaryContent = ""
     private var selectedDateCreated = ""
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
         titleText.layer.borderColor = UIColor.lightGray.cgColor
         titleText.layer.borderWidth = 0.5
         titleText.layer.cornerRadius = 5

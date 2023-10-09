@@ -12,7 +12,6 @@ import CalculateCalendarLogic
 class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,UIScrollViewDelegate, FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance{
 
     @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var backView: UIView!
@@ -122,21 +121,19 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         return formatter
     }()
 
-
     // 祝日判定を行い結果を返すメソッド(True:祝日)
     func judgeHoliday(_ date : Date) -> Bool {
         //祝日判定用のカレンダークラスのインスタンス
         let tmpCalendar = Calendar(identifier: .gregorian)
-
         // 祝日判定を行う日にちの年、月、日を取得
         let year = tmpCalendar.component(.year, from: date)
         let month = tmpCalendar.component(.month, from: date)
         let day = tmpCalendar.component(.day, from: date)
-
         // CalculateCalendarLogic()：祝日判定のインスタンスの生成
         let holiday = CalculateCalendarLogic()
         return holiday.judgeJapaneseHoliday(year: year, month: month, day: day)
     }
+
     // date型 -> 年月日をIntで取得
     func getDay(_ date:Date) -> (Int,Int,Int){
         let tmpCalendar = Calendar(identifier: .gregorian)
@@ -192,11 +189,10 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let calendarEvent = formatter.string(from: date)
         //🟥Modelにどう持たせるか？
         let hasEvent = !calendarRealmModel.eventRead(calendarEvent: calendarEvent).isEmpty
-        if hasEvent == true {
+        if hasEvent {
             return UIImage(named: "calendar")
         } else {
             return nil
-
         }
     }
 

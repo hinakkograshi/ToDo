@@ -74,11 +74,8 @@ class TabContainerViewController: ButtonBarPagerTabStripViewController {
     }
 
     @IBAction func tapDeleteButton(_ sender: UIBarButtonItem) {
-        //checkboxにチェックが入っているもの
-        print(#function)
-
-//        self.currentIndex
-//        self.viewControllers
+        //self.currentIndex
+        //self.viewControllers
         print("viewControllers", viewControllers)
         print("currentIndex", currentIndex)
 
@@ -88,7 +85,8 @@ class TabContainerViewController: ButtonBarPagerTabStripViewController {
         case let rewardViewController as RewardViewController:
             rewardViewController.tapDeleteButton()
         default:
-//            fatalError()
+            //🟥error
+            //fatalError()
             assertionFailure("currentIndex is invalid.")
         }
     }

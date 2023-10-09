@@ -9,7 +9,6 @@ import UIKit
 import XLPagerTabStrip
 import StoreKit
 
-
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate, ChangeDelegate {
     
     //ここがボタンのタイトルに利用されます
@@ -68,8 +67,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ToDoListTableViewCell
         //自作のセルのデリゲート先に自分を設定する
         cell.delegate = self
-        
-        cell.checkImageView.image = UIImage(systemName: "square")
         if let item = toDoRealmModel.toDoItems?[indexPath.row] {
             cell.toDoTextField?.text = item.title
             cell.checkImageView.image = item.done ? UIImage(named: "check") : UIImage(named: "box")
@@ -84,7 +81,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         //変更されたセルのインデックスを取得する。
         let index = tableView.indexPathForRow(at: cell.convert(cell.bounds.origin, to:tableView))
         toDoRealmModel.updateRealm(index: index!.row, value: value)
-        
         self.tableView.reloadData()
     }
     //MARK - TableView Delegate Methods
@@ -94,7 +90,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         //        Updateする場所はdidSelectRowAt.Updateは新規作成と似てる
         toDoRealmModel.checkUpdateRealm(index: indexPath.row)
         tableView.reloadData()
-        
         //選択されてグレーになり、すぐに白に戻す
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -104,7 +99,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         toDoRealmModel.sortCellUpdate(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
     
-    
     //全てのセルを並び替えできるようにしたいので、常にtrue
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -113,18 +107,15 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         return []
     }
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
     }
     
     //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             toDoRealmModel.deleteRealm(index: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-    
-    
+    }
     
     @IBAction func addButonPressed(_ sender: UIButton) {
         var textField = UITextField()
@@ -176,5 +167,4 @@ extension ToDoViewController: IndicatorInfoProvider {
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return itemInfo
     }
-    
 }

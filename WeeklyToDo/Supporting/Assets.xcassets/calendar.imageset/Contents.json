@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "star 3.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-星-24.png",
+      "filename" : "star 3@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "star 3@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

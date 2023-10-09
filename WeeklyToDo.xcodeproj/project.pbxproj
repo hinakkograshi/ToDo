@@ -102,9 +102,9 @@
 				532A71632A9A5B2C00708CBE /* Item.swift */,
 				535DB09C2A9CC52900DEACAB /* Reward.swift */,
 				533662662AA37015005B2DB6 /* DiaryModel.swift */,
-				534CB8762AAD480E00987CF3 /* CalendarRealmModel.swift */,
 				53DE586E2ABF22D90066BDFE /* ToDoRealmModel.swift */,
 				53B742882ABFB1B700814507 /* RewardRealmModel.swift */,
+				534CB8762AAD480E00987CF3 /* CalendarRealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

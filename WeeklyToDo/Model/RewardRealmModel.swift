@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class RewardRealmModel {
-    let realm = try! Realm()
+    private let realm = try! Realm()
     var rewardList: Results<Reward>!
 }
 //Create
@@ -28,7 +28,6 @@ extension RewardRealmModel {
 
 //Read
 extension RewardRealmModel {
-
     func sortRead(){
         //並べ替えデータ取得
         rewardList = realm.objects(Reward.self).sorted(byKeyPath: "order")
@@ -44,16 +43,13 @@ extension RewardRealmModel {
         }
     }
 }
+
 extension RewardRealmModel {
     func checkUpdateRealm(index: Int) {
         if let Reward = rewardList?[index] {
-            do {
-                //Updateitemの更新されたプロパティを以前は何であったかを問わず、トグルして書き込む
-                try realm.write {
-                    Reward.done = !Reward.done
-                }
-            } catch {
-                print("Error saving done status.")
+            //Updateitemの更新されたプロパティを以前は何であったかを問わず、トグルして書き込む
+            try! realm.write {
+                Reward.done = !Reward.done
             }
         }
     }
@@ -73,7 +69,6 @@ extension RewardRealmModel {
                 for index in sourceIndex...destinationIndex {
                     let object = rewardList[index]
                     object.order -= 1
-
                 }
             } else {
                 for index in (destinationIndex..<sourceIndex).reversed() {
@@ -85,21 +80,15 @@ extension RewardRealmModel {
             print("最後の行",sourceObject.order)
         }
     }
-
 }
 
 //🟥Delete
 extension RewardRealmModel {
     func deleteRealm(index: Int) {
-
         if let itemForDeletion = self.rewardList?[index] {
-            do {
-                //セルを削除してRealmデータベースに存在しないようにする
-                try self.realm.write {
-                    self.realm.delete(itemForDeletion)
-                }
-            } catch {
-                print("Error deleting category,\(error)")
+            //セルを削除してRealmデータベースに存在しないようにする
+            try! self.realm.write {
+                self.realm.delete(itemForDeletion)
             }
         }
     }
@@ -107,14 +96,10 @@ extension RewardRealmModel {
 //🟥checkDelete
 extension RewardRealmModel {
     func checkboxDelete () {
-        do {
-            let check = realm.objects(Reward.self).where({$0.done == true})
-            //セルを削除してRealmデータベースに存在しないようにする
-            try self.realm.write {
+        let check = realm.objects(Reward.self).where({$0.done == true})
+        //セルを削除してRealmデータベースに存在しないようにする
+        try! self.realm.write {
             self.realm.delete(check)
-            }
-        } catch {
-            print("Error deleting category,\(error)")
         }
     }
 }

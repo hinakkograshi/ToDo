@@ -66,8 +66,7 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         return cell
     }
-    //🟩
-    //value: textField.text!
+    //🟩value: textField.text!
     func textFieldDidEndEditing(cell: ToDoListTableViewCell, value: String) {
         //変更されたセルのインデックスを取得する。
         let index = tableView.indexPathForRow(at: cell.convert(cell.bounds.origin, to:tableView))
@@ -76,7 +75,6 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     //MARK - TableView Delegate Methods
     //cellがクリックで選択された
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //        Updateする場所はdidSelectRowAt.Updateは新規作成と似てる
         rewardRealmModel.checkUpdateRealm(index: indexPath.row)
@@ -85,12 +83,10 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-
     //ユーザーが並び替えを行うと、UITableViewはUIを更新します
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         rewardRealmModel.sortCellUpdate(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
-
 
     //全てのセルを並び替えできるようにしたいので、常にtrue
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -100,7 +96,6 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return []
     }
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-
     }
 
     //🟥削除
@@ -111,7 +106,6 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
 
-
     @IBAction func addButonPressed(_ sender: UIButton) {
         var textField = UITextField()
         let alert = UIAlertController(title: "ごほうびの追加", message: "", preferredStyle: .alert)
@@ -119,7 +113,6 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.rewardRealmModel.createRealm(rewardText: textField.text!)
             self.tableView.reloadData()
         }
-
         alert.addAction(action)
         alert.addTextField { field in
             textField = field

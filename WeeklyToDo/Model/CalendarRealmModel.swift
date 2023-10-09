@@ -9,20 +9,18 @@ import Foundation
 import RealmSwift
 
 class CalendarRealmModel {
-    let realm = try! Realm()
+    private let realm = try! Realm()
     let diaryModel = DiaryModel()
     var readRealmArray:[Contents] = []
-    var diaryModels: Results<DiaryModel>!
 }
 //Create
 extension CalendarRealmModel {
     func createRealm(realmTitle: String, realmContent: String, realmDate: String, realmDateCreated: String) {
-
+        
         diaryModel.title = realmTitle
         diaryModel.content = realmContent
         diaryModel.date = realmDate
         diaryModel.dateCreated = realmDateCreated
-
         try! realm.write {
             realm.add(diaryModel)
         }
@@ -38,7 +36,7 @@ extension CalendarRealmModel {
 }
 extension CalendarRealmModel {
     func eventRead(calendarEvent:String) -> Results<DiaryModel> {
-        let event = realm.objects(DiaryModel.self).where({$0.date == calendarEvent})
+        let event = realm.objects(DiaryModel.self).where{$0.date == calendarEvent}
         return event
     }
 }
@@ -63,7 +61,6 @@ extension CalendarRealmModel {
 //Update
 extension CalendarRealmModel {
     func updateRealm(updateTitle: String, updateContent: String, updateDate: String, updateDateCreated: String) {
-
         try! realm.write {
             diaryModel.title = updateTitle
             diaryModel.content = updateContent
@@ -78,28 +75,17 @@ extension CalendarRealmModel {
 extension CalendarRealmModel {
     func deleteRealm(calendarDay:String, index: Int) {
         let reault = calendarDayRead(calendarDay: calendarDay)
-            //セルを削除してRealmデータベースに存在しないようにする
-            try! self.realm.write {
-                self.realm.delete(reault[index])
-                filterReadRealm(calendarDay:calendarDay)
-            }
+        //セルを削除してRealmデータベースに存在しないようにする
+        try! self.realm.write {
+            self.realm.delete(reault[index])
+            filterReadRealm(calendarDay:calendarDay)
         }
     }
+}
+
 struct Contents {
     let title: String
     let content:String
     let date: String
     let dateCreated: String
 }
-//
-//extension RealmCRUDModel {
-//    func getResult()-> [Contents] {
-//       return  []
-//
-//    }
-//
-//    func getCount() -> Int {
-//        return readRealmArray.count
-//    }
-//}
-
