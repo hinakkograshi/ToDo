@@ -24,11 +24,11 @@ UIKit
 | ------------- | ------------- | ------------- | ------------- |
 | ![Simulator Screenshot - iPhone 15 Pro - 2023-12-27 at 19 15 15](https://github.com/hinakkograshi/ToDo/assets/131275914/2dc69c8e-09a4-4d97-a683-7c547a634479) | ![Simulator Screenshot - iPhone 15 Pro - 2023-12-27 at 19 15 20](https://github.com/hinakkograshi/ToDo/assets/131275914/f3f08319-403b-409f-a32a-ec4c8a77c2bc) | ![Simulator Screenshot - iPhone 15 Pro - 2023-12-27 at 19 17 24](https://github.com/hinakkograshi/ToDo/assets/131275914/2f2dd44b-7b4b-42f7-a7c8-c65af58ebbed) | ![Simulator Screenshot - iPhone 15 Pro - 2023-12-27 at 19 17 10](https://github.com/hinakkograshi/ToDo/assets/131275914/bf50c7c9-8111-4bea-a5f5-1cc0c61a8f40) |
 
-### やることリスト
-1週間のやることリスト作成画面
-### ごほうびリスト
-1週間のごほうびリスト作成画面
+### やることリスト作成画面
+1週間のやることリスト作成し、達成状況管理。
+### ごほうびリスト作成画面
+1週間のごほうびリスト作成し、達成状況管理。
 ### カレンダー画面
-カレンダー画面
+カレンダー画面から日記を追加。過去の日付を押し、日記を確認可能。
 ### 日記作成画面
-日記作成画面
+日記作成画面でタイトルと内容を記入して保存。
