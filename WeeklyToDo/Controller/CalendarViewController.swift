@@ -71,12 +71,11 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         cell.contentText.text = calendarRealmModel.readRealmArray[indexPath.row].content
         return cell
     }
-    //🍊
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contents = calendarRealmModel.readRealmArray[indexPath.row]
         let editVC = EditViewController.make(contents: contents, calendarDay: calendarDay)
         let navigationController = UINavigationController(rootViewController: editVC)
-        //🟥フルスクリーンにしないと閉じたことを認識されない
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
         //選択されてグレーになり、すぐに白に戻す
@@ -88,7 +87,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         return true
     }
 
-    //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             calendarRealmModel.deleteRealm(calendarDay: calendarDay, index: indexPath.row)
@@ -103,7 +101,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         let diaryVC = UIStoryboard(name: "Diary", bundle: nil).instantiateViewController(withIdentifier: "Diary") as! DiaryViewController
         diaryVC.day = calendarDay
         let navigationController = UINavigationController(rootViewController: diaryVC)
-        //🟥フルスクリーンにしないと閉じたことを認識されない
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true)
     }
@@ -186,7 +183,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
         formatter.dateFormat = "yyyy/MM/dd"
         formatter.calendar = Calendar(identifier: .gregorian)
         let calendarEvent = formatter.string(from: date)
-        //🟥Modelにどう持たせるか？
         let hasEvent = !calendarRealmModel.eventRead(calendarEvent: calendarEvent).isEmpty
         if hasEvent {
             return UIImage(named: "calendar")
@@ -197,9 +193,7 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     @IBAction func supportButtonPressed(_ sender: UIBarButtonItem) {
         let helpVC = UIStoryboard(name: "HelpList", bundle: nil).instantiateViewController(withIdentifier: "HelpList") as! HelpListViewController
-        //🟩TabBar隠す
         helpVC.hidesBottomBarWhenPushed = true
-        // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
         navigationController?.pushViewController(helpVC, animated: true)
     }

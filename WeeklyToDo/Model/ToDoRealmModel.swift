@@ -29,7 +29,6 @@ extension ToDoRealmModel {
 //Read
 extension ToDoRealmModel {
     func sortRead(){
-        //並べ替えデータ取得
         toDoItems = realm.objects(Item.self).sorted(byKeyPath: "order")
     }
 }
@@ -38,7 +37,6 @@ extension ToDoRealmModel {
 extension ToDoRealmModel {
     func updateRealm(index: Int, value: String) {
         try! realm.write {
-            //データを変更する。
             toDoItems[index].title = value
         }
     }
@@ -47,7 +45,6 @@ extension ToDoRealmModel {
 extension ToDoRealmModel {
     func checkUpdateRealm(index: Int) {
         if let item = toDoItems?[index] {
-            //Updateitemの更新されたプロパティを以前は何であったかを問わず、トグルして書き込む
             try! realm.write {
                 item.done = !item.done
             }
@@ -82,7 +79,7 @@ extension ToDoRealmModel {
     }
 }
 
-//🟥Delete
+//Delete
 extension ToDoRealmModel {
     func deleteRealm(index: Int) {
         if let itemForDeletion = self.toDoItems?[index] {
@@ -93,7 +90,7 @@ extension ToDoRealmModel {
         }
     }
 }
-//🟥checkDelete
+//checkDelete
 extension ToDoRealmModel {
     func checkboxDelete () {
         let check = realm.objects(Item.self).where({$0.done == true})

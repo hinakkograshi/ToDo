@@ -35,7 +35,6 @@ class DiaryViewController: UIViewController {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
-    //保存ボタンを押した際に保存
     @IBAction func diarySave(_ sender: UIBarButtonItem) {
         calendarRealmModel.createRealm(realmTitle: titleText.text  ?? "", realmContent: contentText.text ?? "", realmDate: dateLabel.text ?? "", realmDateCreated: Date().description)
         self.dismiss(animated: true,completion: nil)

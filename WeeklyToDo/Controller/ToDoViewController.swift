@@ -10,8 +10,6 @@ import XLPagerTabStrip
 import StoreKit
 
 class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate, ChangeDelegate {
-    
-    //ここがボタンのタイトルに利用されます
     var itemInfo: IndicatorInfo = "やること"
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +22,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         tableView.rowHeight = 60.0
-        //並べ替えデータ取得
         toDoRealmModel.sortRead()
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.delegate = self
@@ -37,13 +34,10 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             SKStoreReviewController.requestReview(in: scene)
         }
-        //🟥忘れるな
         tableView.reloadData()
     }
 
-    //デリゲートメソッド
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //キーボードを閉じる。
         textField.resignFirstResponder()
         return true
     }
@@ -61,11 +55,9 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         return toDoRealmModel.toDoItems.count
     }
-    
-    //🟥customCell
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! ToDoListTableViewCell
-        //自作のセルのデリゲート先に自分を設定する
         cell.delegate = self
         if let item = toDoRealmModel.toDoItems?[indexPath.row] {
             cell.toDoTextField?.text = item.title
@@ -75,31 +67,24 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         return cell
     }
-    //🟩
-    //value: textField.text!
+
     func textFieldDidEndEditing(cell: ToDoListTableViewCell, value: String) {
-        //変更されたセルのインデックスを取得する。
         let index = tableView.indexPathForRow(at: cell.convert(cell.bounds.origin, to:tableView))
         toDoRealmModel.updateRealm(index: index!.row, value: value)
         self.tableView.reloadData()
     }
     //MARK - TableView Delegate Methods
-    //cellがクリックで選択された
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        Updateする場所はdidSelectRowAt.Updateは新規作成と似てる
         toDoRealmModel.checkUpdateRealm(index: indexPath.row)
         tableView.reloadData()
-        //選択されてグレーになり、すぐに白に戻す
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    //ユーザーが並び替えを行うと、UITableViewはUIを更新します
+
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         toDoRealmModel.sortCellUpdate(sourceIndex: sourceIndexPath.row, destinationIndex: destinationIndexPath.row)
     }
-    
-    //全てのセルを並び替えできるようにしたいので、常にtrue
+
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -109,7 +94,6 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
     }
     
-    //🟥削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             toDoRealmModel.deleteRealm(index: indexPath.row)

@@ -29,7 +29,6 @@ extension RewardRealmModel {
 //Read
 extension RewardRealmModel {
     func sortRead(){
-        //並べ替えデータ取得
         rewardList = realm.objects(Reward.self).sorted(byKeyPath: "order")
     }
 }
@@ -38,7 +37,6 @@ extension RewardRealmModel {
 extension RewardRealmModel {
     func updateRealm(index: Int, value: String) {
         try! realm.write {
-            //データを変更する。
             rewardList[index].title = value
         }
     }
@@ -47,7 +45,6 @@ extension RewardRealmModel {
 extension RewardRealmModel {
     func checkUpdateRealm(index: Int) {
         if let Reward = rewardList?[index] {
-            //Updateitemの更新されたプロパティを以前は何であったかを問わず、トグルして書き込む
             try! realm.write {
                 Reward.done = !Reward.done
             }
@@ -82,7 +79,7 @@ extension RewardRealmModel {
     }
 }
 
-//🟥Delete
+//Delete
 extension RewardRealmModel {
     func deleteRealm(index: Int) {
         if let itemForDeletion = self.rewardList?[index] {
@@ -93,11 +90,10 @@ extension RewardRealmModel {
         }
     }
 }
-//🟥checkDelete
+//checkDelete
 extension RewardRealmModel {
     func checkboxDelete () {
         let check = realm.objects(Reward.self).where({$0.done == true})
-        //セルを削除してRealmデータベースに存在しないようにする
         try! self.realm.write {
             self.realm.delete(check)
         }

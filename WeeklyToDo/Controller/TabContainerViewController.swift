@@ -14,14 +14,12 @@ class TabContainerViewController: ButtonBarPagerTabStripViewController {
     let toDoRealmModel = ToDoRealmModel()
 
     override func viewDidLoad() {
-        // 画面UIについての処理
         setupUI()
         super.viewDidLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // 強制的に再選択し、changeCurrentIndexProgressiveを動作させる（ 0番目 → 1番目 → 0番目 ）
         moveToViewController(at: 1, animated: false)
         moveToViewController(at: 0, animated: false)
     }
@@ -47,7 +45,6 @@ class TabContainerViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarItemLeftRightMargin = 32
         // スワイプやButtonBarItemタップ等でページを切り替えた時の動作
         changeCurrentIndexProgressive = { oldCell, newCell, progressPercentage, changeCurrentIndex, animated in
-            // 変更されたか、選択前後のCellをアンラップ
             guard changeCurrentIndex, let oldCell = oldCell, let newCell = newCell else { return }
             // 選択前のセルの状態を指定
             oldCell.label.textColor = UIColor.lightGray
@@ -66,16 +63,12 @@ class TabContainerViewController: ButtonBarPagerTabStripViewController {
 
     @IBAction func supportButtonPressed(_ sender: UIBarButtonItem) {
         let helpVC = UIStoryboard(name: "HelpList", bundle: nil).instantiateViewController(withIdentifier: "HelpList") as! HelpListViewController
-        //🟩TabBar隠す
         helpVC.hidesBottomBarWhenPushed = true
-        // 次の画面のBackボタンを「戻る」に変更
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:  "戻る", style:  .plain, target: nil, action: nil)
         navigationController?.pushViewController(helpVC, animated: true)
     }
 
     @IBAction func tapDeleteButton(_ sender: UIBarButtonItem) {
-        //self.currentIndex
-        //self.viewControllers
         print("viewControllers", viewControllers)
         print("currentIndex", currentIndex)
 
@@ -85,8 +78,6 @@ class TabContainerViewController: ButtonBarPagerTabStripViewController {
         case let rewardViewController as RewardViewController:
             rewardViewController.tapDeleteButton()
         default:
-            //🟥error
-            //fatalError()
             assertionFailure("currentIndex is invalid.")
         }
     }

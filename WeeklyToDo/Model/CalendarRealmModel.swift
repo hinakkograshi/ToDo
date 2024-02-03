@@ -43,9 +43,7 @@ extension CalendarRealmModel {
 
 extension CalendarRealmModel {
     func filterReadRealm(calendarDay:String) {
-        //🟥viewDidLoad()読み込みしなくても配列を一旦初期化。押した日のcellを表示。これ重要やった！
         readRealmArray = []
-        //2023/9/9
         for filterReadResult in realm.objects(DiaryModel.self).filter(NSPredicate(format: "date == %@", calendarDay)){
             let contents = Contents(
                 title: filterReadResult.title,
