@@ -1,12 +1,12 @@
 PODS:
   - CalculateCalendarLogic (0.6.1)
   - FSCalendar (2.8.4)
-  - IQKeyboardManagerSwift (6.5.12)
-  - Realm (10.42.1):
-    - Realm/Headers (= 10.42.1)
-  - Realm/Headers (10.42.1)
-  - RealmSwift (10.42.1):
-    - Realm (= 10.42.1)
+  - IQKeyboardManagerSwift (7.0.0)
+  - Realm (10.45.3):
+    - Realm/Headers (= 10.45.3)
+  - Realm/Headers (10.45.3)
+  - RealmSwift (10.45.3):
+    - Realm (= 10.45.3)
   - XLPagerTabStrip (9.1.0)
 
 DEPENDENCIES:
@@ -28,11 +28,11 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   CalculateCalendarLogic: e4f7c7fe17f68b1d30fb51560acc634b4629a622
   FSCalendar: 2d1d0d9398f12d439f55c1fe0f01525b151b8260
-  IQKeyboardManagerSwift: 371b08cb39664fb56030f5345c815a4ffc74bbc0
-  Realm: f433b80a05f68575e88364d6fcc6234965ccc5af
-  RealmSwift: 757e1416e2314f7e1543abdb2aa65b311d7b6545
+  IQKeyboardManagerSwift: bd69f3a49f6ead9cb6ce17723cf0c6c9b948d83e
+  Realm: b277b843c7505c1e30e3a70322a24a09283e62bb
+  RealmSwift: f6690053e81733801e6619eb5b39993ab76f7050
   XLPagerTabStrip: 27f3bfe23c53b4251c6481b06b1c289458a3fc1d
 
 PODFILE CHECKSUM: 43621f8b62dc13572179d867bd6fa1d23dd372c4
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.14.2

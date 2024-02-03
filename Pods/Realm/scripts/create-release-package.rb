@@ -11,8 +11,8 @@ VERSION = ARGV[1]
 XCODE_VERSIONS = ARGV[2..]
 ROOT = Pathname(__FILE__).+('../..').expand_path
 BUILD_SH = Pathname(__FILE__).+('../../build.sh').expand_path
-PLATFORMS = %w{osx ios watchos tvos catalyst}
 VERBOSE = false
+OBJC_XCODE_VERSION = XCODE_VERSIONS.last
 
 def sh(*args)
   puts "executing: #{args.join(' ')}" if VERBOSE
@@ -20,7 +20,7 @@ def sh(*args)
 end
 
 def platforms(xcode_version)
-  if xcode_version.start_with? '15'
+  if xcode_version.start_with? '15.2'
     %w{osx ios watchos tvos catalyst visionos}
   else
     %w{osx ios watchos tvos catalyst}
@@ -31,13 +31,6 @@ def create_xcframework(root, xcode_version, configuration, name)
   prefix = "#{root}/#{xcode_version}"
   output = "#{prefix}/#{configuration}/#{name}.xcframework"
   files = Dir.glob "#{prefix}/#{configuration}/*/#{name}.xcframework/*/#{name}.framework"
-
-  # We only ship a single Realm.xcframework built with the latest non-beta version of Xcode.
-  # Until Xcode 15 leaves beta, that means we need to stick a visionos slice
-  # built with Xcode 15 into an otherwise Xcode 14 xcframework.
-  if name == 'Realm' and xcode_version.start_with? '14' and XCODE_VERSIONS.include? '15.0'
-    files += Dir.glob "#{root}/15.0/#{configuration}/visionos/#{name}.xcframework/*/#{name}.framework"
-  end
 
   sh 'xcodebuild', '-create-xcframework', '-allow-internal-distribution',
      '-output', output, *files.flat_map {|f| ['-framework', f]}
@@ -74,9 +67,8 @@ Dir.mktmpdir do |tmp|
   end
 
   puts 'Creating Obj-C XCFrameworks'
-  xcode_14_version = XCODE_VERSIONS.filter {|v| v.start_with? '14'}.last
-  create_xcframework tmp, xcode_14_version, 'Release', 'Realm'
-  create_xcframework tmp, xcode_14_version, 'Static', 'Realm'
+  create_xcframework tmp, OBJC_XCODE_VERSION, 'Release', 'Realm'
+  create_xcframework tmp, OBJC_XCODE_VERSION, 'Static', 'Realm'
 
   puts 'Creating release package'
   package_dir = "#{tmp}/realm-swift-#{VERSION}"
@@ -95,9 +87,9 @@ Dir.mktmpdir do |tmp|
       </plist>
     }
   end
-  sh 'cp', '-Rca', "#{tmp}/#{xcode_14_version}/Release/Realm.xcframework", "#{package_dir}"
+  sh 'cp', '-Rca', "#{tmp}/#{OBJC_XCODE_VERSION}/Release/Realm.xcframework", "#{package_dir}"
   FileUtils.mkdir_p "#{package_dir}/static"
-  sh 'cp', '-Rca', "#{tmp}/#{xcode_14_version}/Static/Realm.xcframework", "#{package_dir}/static"
+  sh 'cp', '-Rca', "#{tmp}/#{OBJC_XCODE_VERSION}/Static/Realm.xcframework", "#{package_dir}/static"
   for version in XCODE_VERSIONS
     FileUtils.mkdir_p "#{package_dir}/#{version}"
     sh 'cp', '-Rca', "#{tmp}/#{version}/Release/RealmSwift.xcframework", "#{package_dir}/#{version}"
@@ -108,18 +100,27 @@ Dir.mktmpdir do |tmp|
   end
 
   puts 'Creating SPM release zips'
-  zip 'Realm.spm.zip', "#{tmp}/#{xcode_14_version}/Release/Realm.xcframework"
+  Dir.chdir "#{tmp}/#{OBJC_XCODE_VERSION}/Release" do
+    zip 'Realm.spm.zip', "Realm.xcframework"
+  end
   for version in XCODE_VERSIONS
     Dir.chdir "#{tmp}/#{version}/Release" do
       zip "RealmSwift@#{version}.spm.zip", 'RealmSwift.xcframework'
     end
   end
+end
 
-  puts 'Creating Carthage release zip'
-  Dir.mktmpdir do |tmp2|
-    Dir.chdir(tmp2) do
-      sh 'cp', '-Rca', "#{tmp}/#{xcode_14_version}/Release/Realm.xcframework", tmp2
-      sh 'cp', '-Rca', "#{tmp}/#{xcode_14_version}/Release/RealmSwift.xcframework", tmp2
+puts 'Creating Carthage release zip'
+Dir.mktmpdir do |tmp|
+  tmp = File.realpath tmp
+  Dir.chdir(tmp) do
+    for platform in platforms('15.1')
+      sh 'unzip', "#{ROOT}/realm-#{platform}-#{OBJC_XCODE_VERSION}.zip"
+    end
+    create_xcframework tmp, '', 'Release', 'RealmSwift'
+    create_xcframework tmp, '', 'Release', 'Realm'
+
+    Dir.chdir('Release') do
       zip 'Carthage.xcframework.zip', 'Realm.xcframework', 'RealmSwift.xcframework'
     end
   end

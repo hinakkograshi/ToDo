@@ -49,7 +49,6 @@ class CalendarViewController: UIViewController,UITableViewDelegate, UITableViewD
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("モーダルから戻ったよ")
         calendarRealmModel.filterReadRealm(calendarDay:calendarDay)
         calendar.reloadData()
         tableView.reloadData()

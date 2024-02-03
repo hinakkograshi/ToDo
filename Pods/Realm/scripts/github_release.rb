@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'pathname'
 require 'octokit'
 
 raise 'usage: github_release.rb version' unless ARGV.length == 1
@@ -38,7 +39,7 @@ prerelease = (VERSION =~ /alpha|beta|rc|preview/) ? true : false
 response = github.create_release(REPOSITORY, RELEASE, name: RELEASE, body: RELEASE_NOTES, prerelease: prerelease)
 release_url = response[:url]
 
-Dir.glob '*.zip' do |upload|
+Dir.glob 'build/*.zip' do |upload|
   puts "Uploading #{upload} to GitHub"
   github.upload_asset(release_url, upload, content_type: 'application/zip')
 end

@@ -250,6 +250,7 @@ enum FindRes {
 enum IndexMethod {
     index_FindFirst,
     index_FindAll_nocopy,
+    index_FindAll_prefix,
     index_Count,
 };
 
@@ -360,6 +361,14 @@ constexpr inline size_t round_down(size_t p, size_t align)
     return r & (~(align - 1));
 }
 
+// return pointer to found character or to terminating NUL
+static inline const char* find_chr(const char* p, char c)
+{
+    while (*p && *p != c) {
+        ++p;
+    }
+    return p;
+}
 
 #ifdef _WIN32
 typedef HANDLE FileDesc;
