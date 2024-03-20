@@ -36,6 +36,11 @@ class DiaryViewController: UIViewController {
     }
 
     @IBAction func diarySave(_ sender: UIBarButtonItem) {
+        if titleText.text == "" || contentText.text == "" {
+            let nothingAlert = AlertMaker().noStringAlert(title: "追加できませんでした。", message: "中身のない日記は追加できません。")
+            present(nothingAlert, animated: true)
+            return
+        }
         calendarRealmModel.createRealm(realmTitle: titleText.text  ?? "", realmContent: contentText.text ?? "", realmDate: dateLabel.text ?? "", realmDateCreated: Date().description)
         self.dismiss(animated: true,completion: nil)
     }

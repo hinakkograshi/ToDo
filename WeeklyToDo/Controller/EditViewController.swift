@@ -40,6 +40,11 @@ class EditViewController: UIViewController {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     @IBAction func editButton(_ sender: Any) {
+        if titleText.text == "" || contentText.text == "" {
+            let nothingAlert = AlertMaker().noStringAlert(title: "追加できませんでした。", message: "中身のない日記は追加できません。")
+            present(nothingAlert, animated: true)
+            return
+        }
         calendarRealmModel.updateRealm(updateTitle: titleText.text  ?? "", updateContent: contentText.text ?? "", updateDate: day, updateDateCreated: selectedDateCreated)
         self.dismiss(animated: true,completion: nil)
     }

@@ -97,6 +97,11 @@ class RewardViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var textField = UITextField()
         let alert = UIAlertController(title: "ごほうびの追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "追加", style: .default) { action in
+            if textField.text == "" {
+                let nothingAlert = AlertMaker().noStringAlert(title: "追加できませんでした。", message: "中身のないごほうびは追加できません。")
+                self.present(nothingAlert, animated: true, completion: nil)
+                return
+            }
             self.rewardRealmModel.createRealm(rewardText: textField.text!)
             self.tableView.reloadData()
         }

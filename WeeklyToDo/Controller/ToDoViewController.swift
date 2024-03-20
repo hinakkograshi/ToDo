@@ -105,10 +105,15 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         var textField = UITextField()
         let alert = UIAlertController(title: "タスクの追加", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "追加", style: .default) { action in
+            if textField.text == "" {
+                let nothingAlert = AlertMaker().noStringAlert(title: "追加できませんでした。", message: "中身のないタスクは追加できません。")
+                self.present(nothingAlert, animated: true, completion: nil)
+                return
+            }
             self.toDoRealmModel.createRealm(toDoText: textField.text!)
             self.tableView.reloadData()
         }
-        
+
         alert.addAction(action)
         alert.addTextField { field in
             textField = field
@@ -118,6 +123,8 @@ class ToDoViewController: UIViewController, UITableViewDelegate, UITableViewData
         alert.addAction(cancelButton)
         present(alert, animated: true, completion: nil)
     }
+
+
 
     func tapDeleteButton() {
         let alert = UIAlertController(title: "削除", message: "達成したタスクを削除しますか？", preferredStyle: .alert)

@@ -21,7 +21,7 @@ class HelpListViewController: UIViewController, UITableViewDelegate, UITableView
         HelpItem(
             label:"開発者を応援する📣",
             action: {
-                let url = URL(string: "https://itunes.apple.com/app/App_ID?action=write-review")!
+                let url = URL(string: "https://itunes.apple.com/app/6464771684?action=write-review")!
                 UIApplication.shared.open(url)
             }
         )
