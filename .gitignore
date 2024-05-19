@@ -1,4 +1,17 @@
 # Xcode
+## fastlane
+fastlane/.env
+# fastlane specific
+**/fastlane/report.xml
+
+# deliver temporary files
+**/fastlane/Preview.html
+
+# snapshot generated screenshots
+**/fastlane/screenshots
+
+# scan temporary files
+**/fastlane/test_output
 ## Mac OS X
 .DS_Store
 ## Xcode build files
