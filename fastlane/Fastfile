@@ -22,11 +22,10 @@ platform :ios do
   lane :release do |options|
     bump_type = options.fetch(:bump_type, "minor")
     increment_version_number(bump_type: bump_type)
-    new_version = get_version_number(xcodeproj: "WeeklyToDo.xcodeproj")
 
     increment_build_number(xcodeproj: "WeeklyToDo.xcodeproj")
     build_app(workspace: "WeeklyToDo.xcworkspace", scheme: "WeeklyToDo")
-    upload_to_app_store(skip_metadata: true, skip_screenshots: true, force: true, app_version: new_version)
+    upload_to_app_store(skip_metadata: true, skip_screenshots: true, force: true)
     create_branch()
   end
 end
