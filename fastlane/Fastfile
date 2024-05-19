@@ -12,8 +12,8 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
-ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "30"
 
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "30"
 
 default_platform(:ios)
 
