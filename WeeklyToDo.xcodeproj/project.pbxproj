@@ -38,6 +38,7 @@
 		5356D60D2AA393180049EFB4 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5356D60B2AA393180049EFB4 /* DiaryTableViewCell.swift */; };
 		5356D60E2AA393180049EFB4 /* DiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5356D60C2AA393180049EFB4 /* DiaryTableViewCell.xib */; };
 		535DB09D2A9CC52900DEACAB /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535DB09C2A9CC52900DEACAB /* Reward.swift */; };
+		536D72572CA1348E00DFC3B1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 536D72562CA1348E00DFC3B1 /* Settings.bundle */; };
 		53B742892ABFB1B700814507 /* RewardRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B742882ABFB1B700814507 /* RewardRealmModel.swift */; };
 		53DE586F2ABF22D90066BDFE /* ToDoRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DE586E2ABF22D90066BDFE /* ToDoRealmModel.swift */; };
 		AC14BD069AA203C5360DC926 /* Pods_WeeklyToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F50F7B10FAB5FD98DE2C38D /* Pods_WeeklyToDo.framework */; };
@@ -80,6 +81,7 @@
 		5356D60B2AA393180049EFB4 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		5356D60C2AA393180049EFB4 /* DiaryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiaryTableViewCell.xib; sourceTree = "<group>"; };
 		535DB09C2A9CC52900DEACAB /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
+		536D72562CA1348E00DFC3B1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		53B742882ABFB1B700814507 /* RewardRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardRealmModel.swift; sourceTree = "<group>"; };
 		53DE586E2ABF22D90066BDFE /* ToDoRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoRealmModel.swift; sourceTree = "<group>"; };
 		8F50F7B10FAB5FD98DE2C38D /* Pods_WeeklyToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeeklyToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +162,7 @@
 		533B76A52A90A17300CDF8A5 = {
 			isa = PBXGroup;
 			children = (
+				536D72562CA1348E00DFC3B1 /* Settings.bundle */,
 				533B76B02A90A17400CDF8A5 /* WeeklyToDo */,
 				533B76AF2A90A17400CDF8A5 /* Products */,
 				C85692CA31A5C5B45C3C8FE2 /* Pods */,
@@ -273,6 +276,7 @@
 				533662612AA35320005B2DB6 /* Diary.storyboard in Resources */,
 				530A725C2AB5DA41009D2B67 /* HelpList.storyboard in Resources */,
 				533B76BE2A90A17400CDF8A5 /* LaunchScreen.storyboard in Resources */,
+				536D72572CA1348E00DFC3B1 /* Settings.bundle in Resources */,
 				533B76BB2A90A17400CDF8A5 /* Assets.xcassets in Resources */,
 				5336AA832A9AD4C30072585A /* ToDo.storyboard in Resources */,
 				5336AA852A9AD4F70072585A /* Reward.storyboard in Resources */,
