@@ -1,0 +1,44 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "30"
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new release build to the App Store"
+  lane :release do |options|
+    bump_type = options.fetch(:bump_type, "minor")
+    increment_version_number(bump_type: bump_type)
+
+    increment_build_number(xcodeproj: "WeeklyToDo.xcodeproj")
+    build_app(workspace: "WeeklyToDo.xcworkspace", scheme: "WeeklyToDo")
+    upload_to_app_store(skip_metadata: true, skip_screenshots: true, force: true)
+    create_branch()
+  end
+end
+
+platform :ios do
+  lane :create_branch do
+   new_version = get_version_number(xcodeproj: "WeeklyToDo.xcodeproj")
+   branch_name = "release/ver#{new_version}"
+
+   sh("echo #{new_version}")
+   sh("git checkout -b #{branch_name}")
+   sh("git add ../")
+   sh("git commit -m '#{new_version}に更新'")
+   sh("git push --set-upstream origin #{branch_name}")
+  end
+ end
